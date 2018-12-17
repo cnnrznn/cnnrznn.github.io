@@ -1,3 +1,8 @@
+---
+title: 'Charging the Roaster'
+date: 2018-07-20
+---
+
 I don't consider myself an expert (yet), but I am frequently finding the need to share and record my coffee related opinions in some manner.
 I hope that part of this blog can serve as both a simple knowledge repository as well as the home for my opinions.
 Some of the topics I want to cover are -
