@@ -23,6 +23,7 @@ This will allow me to pick roads that are considered good and/or safe by other c
 **Google maps** will be used to mark key destinations such as grocery stores and housing.
 I can create a custom map that I can download offline prior to the trip.
 This will allow me to view the information on the map while only requiring a GPS (and _not_ data) from my phone, using less battery.
+Other things that will be useful are bike shops, gas stations (food/water stops), and I'm sure more I haven't thought of yet.
 
 **warmshowers.org** is a community of touring cyclists.
 My goal is to pick a few nights over the course of the trip to stop at someone's home and, well, take a hot shower.
