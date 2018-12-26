@@ -53,6 +53,8 @@ Skills
 
 Publications
 ======
+* "**PicoJump: A System for Transparently Migrating Processes to Resources**" [Under Submission. 2018]
+
   <ul>{% for post in site.publications %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
@@ -71,4 +73,3 @@ Teaching
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
