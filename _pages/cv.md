@@ -17,26 +17,26 @@ Education
 Work experience
 ======
 * 2016 - present: Research Assistant
-  * Northeastern University
+  * **Northeastern University**
   * _PicoJump_: A system for process migration and load balancing.
                 Enabling single-machine applications to execute correctly in distributed environments.
                 The system is transparent to the operating system and application.
 
 * May 2015 - May 2016: Research Assistant
-  * University of Delaware
+  * **University of Delaware**
   * _HYPPO_: Developed a HYbrid Piece-wise POlynomial approach for optimizing MapReduce framework hyper-parameters.
 
 * September 2014 - May 2015: Software Engineer
-  * EM Photonics
+  * **EM Photonics**
   * _Software development_: participated in the software development process.
                         Fixed bugs and made enhancements to a video-processing application.
 
 * Summer 2014: QA Software Engineer
-  * Nasdaq OMX
+  * **Nasdaq OMX**
   * _Performance testing automation_: Developed framework and tests for performance evaluation of a web application.
 
 * Summer 2013: QA Software Engineer
-  * Lattice Engines
+  * **Lattice Engines**
   * _Automated unit testing_: Developed framework and tests for automated application testing.
 
 Skills
