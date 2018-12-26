@@ -11,30 +11,45 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.S. in Computer Science, University of Delaware, 2016
+* Ph.D in Computer Science, Northeastern University, 2021 (expected)
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* 2016 - present: Research Assistant
+  * Northeastern University
+  * _PicoJump_: A system for process migration and load balancing.
+                Enabling single-machine applications to execute correctly in distributed environments.
+                The system is transparent to the operating system and application.
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-  
+* May 2015 - May 2016: Research Assistant
+  * University of Delaware
+  * _HYPPO_: Developed a HYbrid Piece-wise POlynomial approach for optimizing MapReduce framework hyper-parameters.
+
+* September 2014 - May 2015: Software Engineer
+  * EM Photonics
+  * _Software development_: participated in the software development process.
+                        Fixed bugs and made enhancements to a video-processing application.
+
+* Summer 2014: QA Software Engineer
+  * Nasdaq OMX
+  * _Performance testing automation_: Developed framework and tests for performance evaluation of a web application.
+
+* Summer 2013: QA Software Engineer
+  * Lattice Engines
+  * _Automated unit testing_: Developed framework and tests for automated application testing.
+
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Distributed Systems
+* Operating systems
+* Programming languages
+  * C
+  * Python
+  * Clojure
+  * C++
+  * C#
+  * Java
 
 Publications
 ======
