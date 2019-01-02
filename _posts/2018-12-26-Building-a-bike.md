@@ -5,7 +5,7 @@ permalink: /posts/2012/08/building-a-bike/
 tags:
   - cycling
   - making
-published: false
+published: true
 ---
 
 This is a blog post to log the progress and process of building a bike.
@@ -15,6 +15,18 @@ I've done basic maintenance on bikes, but never have I build one from scratch.
 The parts
 ======
 
+Salvaged
+--------
+* handlebars / bar-end shifters
+* brakes
+* cranks
+* chain rings
+* rear derailleur
+* headset spacers
+* stem
+
+New
+-------
 * Bike Nashbar carbon road frame + fork (https://www.bikenashbar.com/cycling/bikes-frames/frames/nashbar-carbon-road-frame-and-fork-nb-crfs)
 * Shimano 105 5700 front derailleur (34.9mm diameter, 2x10 speed)
 * Shimano Ultegra 6701 10 speed chain
