@@ -18,6 +18,7 @@ The parts
 * Bike Nashbar carbon road frame + fork (https://www.bikenashbar.com/cycling/bikes-frames/frames/nashbar-carbon-road-frame-and-fork-nb-crfs)
 * Shimano 105 5700 front derailleur (34.9mm diameter, 2x10 speed)
 * Shimano Ultegra 6701 10 speed chain
+* Cinelli Vai seat post (31.6mm diameter)
 
 The tools
 ======
