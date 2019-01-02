@@ -24,6 +24,8 @@ Salvaged
 * rear derailleur
 * headset spacers
 * stem
+* wheels
+* cassette
 
 New
 -------
@@ -31,6 +33,7 @@ New
 * Shimano 105 5700 front derailleur (34.9mm diameter, 2x10 speed)
 * Shimano Ultegra 6701 10 speed chain
 * Cinelli Vai seat post (31.6mm diameter)
+* tires (28mm, TBD)
 
 The tools
 ======
