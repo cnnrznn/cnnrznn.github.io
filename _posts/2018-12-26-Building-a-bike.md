@@ -10,7 +10,7 @@ published: true
 
 This is a blog post to log the progress and process of building a bike.
 My first real bicycle had its frame bent while it was locked in Porter Square, and I'm going to revive it by putting the old parts on a new frame.
-I've done basic maintenance on bikes, but never have I build one from scratch.
+I've done basic maintenance on bikes, but never have I built one from scratch.
 
 The parts
 ======
