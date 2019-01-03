@@ -28,3 +28,41 @@ Other things that will be useful are bike shops, gas stations (food/water stops)
 **warmshowers.org** is a community of touring cyclists.
 My goal is to pick a few nights over the course of the trip to stop at someone's home and, well, take a hot shower.
 The community is made up of cycling tourists, so I will likely get to hear some interesting stories from others as well.
+
+The Route
+===============
+Although the purpose of this journey is to see the country, I don't have unlimited time.
+I want to enjoy the biking, but I also want to get there as soon as possible to see my friends :)
+Therefore, I am using Strava to make create the backbone or 'highway' of the route.
+Once I have that, I can tweak it to take me to grocery stores, campsites, food and water stops, and warm showers destinations.
+
+Campsites
+----------------
+
+Warmshowers
+----------------
+
+Grocery stores
+---------------
+
+Biking Abroad
+===============
+The route is going to take me through Canada.
+The alternate would be to make a big U South through Ohio and Indiana.
+Again, I don't have time, and if I go North I can see Niagara falls for the first time :)
+
+The Gear
+===============
+You've read this far, time for the fun part :)
+
+The bike and bags
+------------
+
+Camping
+-----------
+
+Water
+-----------
+
+Clothing
+-----------
