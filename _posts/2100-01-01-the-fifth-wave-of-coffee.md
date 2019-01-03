@@ -1,3 +1,12 @@
+---
+title: 'The Fifth Wave of Coffee'
+date: 2019-01-03
+permalink: /posts/2019/01/the-fifth-wave-of-coffee/
+tags:
+  - coffee
+published: true
+---
+
 American coffee has progressed through a series of waves. Each wave is defined by common trends in the coffee industry. The consensus is that there have been three waves so far, and we are in the early stages of the fourth wave. The purpose of this article is to give a -very- brief summary of each wave, followed by speculation about what the fifth wave and beyond may be.
 
 # History

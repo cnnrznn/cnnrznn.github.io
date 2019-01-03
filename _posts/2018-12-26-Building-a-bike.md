@@ -1,7 +1,7 @@
 ---
 title: 'Building a bike'
 date: 2018-12-26
-permalink: /posts/2012/08/building-a-bike/
+permalink: /posts/2018/12/building-a-bike/
 tags:
   - cycling
   - making
