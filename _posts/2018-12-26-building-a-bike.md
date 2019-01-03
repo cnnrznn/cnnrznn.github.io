@@ -10,7 +10,7 @@ published: true
 
 This is a blog post to log the progress and process of building a bike.
 My first real bicycle had its frame bent while it was locked in Porter Square, and I'm going to revive it by putting the old parts on a new frame.
-I've done basic maintenance on bikes, but never have I built one from scratch.
+This is the log of my first ground-up bike build.
 
 The parts
 ======
@@ -47,13 +47,32 @@ Although it can be done by hand, there are torque values written on the stem tha
 The process
 ======
 
+Stripping the old components
+---------
 I started by breaking the chain on the old bike.
 It's around 7 or 8 years old, and although it's in good conditions (or seems like it), I'm taking the opportunity to get a new one.
 With the chain removed I can also remove the rear derailleur.
 I cut the cables and housings; these are old and are also due to be replaced.
-I put the rear derailleur on the new frame after wiping it down and applying grease to the threads.
 
 Next up is the front derailleur.
-Unfortunately, the clamp is the wrong size and I'll need to get one that fits the new frame.
+After successfully removing it, I discovered the clamp is the wrong size for the new frame and I'll need to get one that fits.
 From here, I decide to completely dismantle the old bike and create a complete shopping list for this project.
 See _The parts_ section for the shopping list.
+
+Next is the saddle and seatpost.
+I realize the seatpost is also the wrong size.
+I will keep the old saddle, though, I love that thing.
+
+The stem and handlebars prove to be a bit of a pain with old, cemented-on tape.
+However, they pop right off of the stem.
+I'll be able to salvage the handlebars, stem, and steerer tube spacers.
+
+Work for a bike shop
+------------
+The frame came with a bottom bracket.
+Instead of buying an expensive tool, I went to my local hardware store and picked up a tap screw, a nut, and a couple of fender washers to make my on shoddy press.
+In the end, this failed by applying force to the bearings instead of the cups and destroying them.
+So, I add a bottom bracket to the shopping list.
+I called my favorite bike shop and they said they could install the bottom bracket (BB) for $20.
+Because I don't forsee myself building bikes very often, it is worth it to pay for the service instead of the tool which could cost 3-6 times that amount.
+I'd rather them do it right then destroy _another_ set of $30-50 bearings.
