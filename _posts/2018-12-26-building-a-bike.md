@@ -66,6 +66,7 @@ I will keep the old saddle, though, I love that thing.
 The stem and handlebars prove to be a bit of a pain with old, cemented-on tape.
 However, they pop right off of the stem.
 I'll be able to salvage the handlebars, stem, and steerer tube spacers.
+For style, I could even keep the Masi top-cap.
 
 Work for a bike shop
 ------------
@@ -76,3 +77,6 @@ So, I add a bottom bracket to the shopping list.
 I called my favorite bike shop and they said they could install the bottom bracket (BB) for $20.
 Because I don't forsee myself building bikes very often, it is worth it to pay for the service instead of the tool which could cost 3-6 times that amount.
 I'd rather them do it right then destroy _another_ set of $30-50 bearings.
+
+Assembling the bike
+-----------
