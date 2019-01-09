@@ -1,6 +1,9 @@
 ---
 title: 'Charging the Roaster'
 date: 2018-07-20
+categories:
+  - coffee
+  - making
 ---
 
 I don't consider myself an expert (yet), but I am frequently finding the need to share and record my coffee related opinions in some manner.
