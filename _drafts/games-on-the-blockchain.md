@@ -17,4 +17,6 @@ The tools
 
 Hyperledger fabric
 ----
-
+Hyperledger _Fabric_ is an exciting new work from IBM that separate the blockchain from the application.
+In traditional blockchain applications, such as Bitcoin, Ethereum, etc., the blockchain and application are one monolithic unit.
+Hyperledger Fabric (simply Fabric from here on), aims to solve this by segregating the application from the blockchain, and further breaking the blockchain into modular, pluggable components.
