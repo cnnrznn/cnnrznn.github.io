@@ -12,7 +12,7 @@ I love cycling and camping, and thought this would be a good excuse to try cycli
 This blog post is meant to serve as my log of the planning process for such a trip.
 
 Planning tools
-----
+====
 
 To plan the journey I'll be using a couple crucial tools.
 
