@@ -14,4 +14,4 @@ Computers fail, and I love to think about how applications can be _correct_ and 
 
 When I'm not working on computers, I love to be outdoors hiking, climbing, and cycling.
 Besides writing computer programs, I roast coffee and work on bikes.
-If any of these sound interesting to you, I write about them under _Blog Posts_ :)
+If any of these things sound interesting to you, I write about them under _Blog Posts_ :)
