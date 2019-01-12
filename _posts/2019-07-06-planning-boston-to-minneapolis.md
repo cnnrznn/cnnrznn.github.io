@@ -4,7 +4,7 @@ date: 2019-01-11
 permalink: /posts/2019/07/06/planning-a-journey-by-bicycle/
 tags:
   - cycling
-published: true
+published: false
 ---
 
 My college roommate is getting married on July 6th, 2019 in Minnesota.
