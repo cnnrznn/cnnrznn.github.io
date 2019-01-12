@@ -7,7 +7,7 @@ tags:
 published: true
 ---
 
-My college roommate is getting married in June 2019 in Minnesota.
+My college roommate is getting married on July 6th, 2019 in Minnesota.
 I love cycling and camping, and thought this would be a good excuse to try cycling across the country.
 This blog post is meant to serve as my log of the planning process for such a trip.
 
