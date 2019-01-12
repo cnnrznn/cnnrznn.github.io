@@ -17,7 +17,7 @@ Planning tools
 To plan the journey I'll be using a couple crucial tools.
 
 **Strava** will be used for route planning.
-Strava is 'facebook for athletes', and it has excellent tools for route planning that combine shortest distance with 'best route'.
+Strava is 'facebook for athletes', and it has excellent tools for route planning that combine shortest distance with the most popular roads.
 This will allow me to pick roads that are considered good and/or safe by other cyclists.
 
 **Google maps** will be used to mark key destinations such as grocery stores and housing.
@@ -33,7 +33,7 @@ The Route
 ===============
 Although the purpose of this journey is to see the country, I don't have unlimited time.
 I want to enjoy the biking, but I also want to get there as soon as possible to see my friends :)
-Therefore, I am using Strava to make create the backbone or 'highway' of the route.
+Therefore, I am using Strava to determine the backbone or 'highway' of the route.
 Once I have that, I can tweak it to take me to grocery stores, campsites, food and water stops, and warm showers destinations.
 
 Major legs of the trip are:
