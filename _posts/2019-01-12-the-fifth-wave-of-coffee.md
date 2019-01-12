@@ -40,5 +40,7 @@ The third wave is certainly characterized by the aggressive push in the industry
 **Note**: I say "would" as if the third wave of coffee has ended. At the time of writing, I don't believe it is completely in the past, rather we are somewhere in the grey middle ground between the third and fourth waves. Change takes time, and the lines are blurry. Bear with me.
 
 # The Fifth Wave and Beyond
+In short, the fifth wave of coffee in America will be to come to terms with the bitterness of espresso.
+In an ideal world, I also would like to see espresso prices go down.
 
 # Citations
