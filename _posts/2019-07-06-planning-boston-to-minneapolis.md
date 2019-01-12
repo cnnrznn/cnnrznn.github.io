@@ -1,6 +1,6 @@
 ---
 title: 'Planning a journey by bicycle'
-date: 2019-07-06
+date: 2019-01-11
 permalink: /posts/2019/07/06/planning-a-journey-by-bicycle/
 tags:
   - cycling
@@ -12,7 +12,7 @@ I love cycling and camping, and thought this would be a good excuse to try cycli
 This blog post is meant to serve as my log of the planning process for such a trip.
 
 Planning tools
-------
+----
 
 To plan the journey I'll be using a couple crucial tools.
 
@@ -36,14 +36,26 @@ I want to enjoy the biking, but I also want to get there as soon as possible to 
 Therefore, I am using Strava to make create the backbone or 'highway' of the route.
 Once I have that, I can tweak it to take me to grocery stores, campsites, food and water stops, and warm showers destinations.
 
+Major legs of the trip are:
+1. Boston to Niagara Falls
+2. Niagara Falls to Sombra, ON
+3. Sombra to Muskegon, MI
+4. Milwaukee to Saint Paul
+
+Water Crossings
+-------
+There are two places on the route I need to take a ferry.
+The first is to cross from Sombra, ON to Marine City, MI by a company called Bluewater Ferry.
+The second is to cross Lake Michigan from Muskegon, MI to Milwaukee, WI by Lake Express.
+
 Campsites
-----------------
+=============
 
 Warmshowers
-----------------
+====
 
 Grocery stores
----------------
+====
 
 Biking Abroad
 ===============
