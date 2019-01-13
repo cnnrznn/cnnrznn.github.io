@@ -37,10 +37,18 @@ Therefore, I am using Strava to determine the backbone or 'highway' of the route
 Once I have that, I can tweak it to take me to grocery stores, campsites, food and water stops, and warm showers destinations.
 
 Major legs of the trip are:
-1. Boston to Niagara Falls
-2. Niagara Falls to Sombra, ON
-3. Sombra to Muskegon, MI
-4. Milwaukee to Saint Paul
+1. Boston to Niagara Falls (4 days)
+2. Niagara Falls to Sombra, ON (2 days)
+3. Sombra to Muskegon, MI (3 days)
+4. Milwaukee to Saint Paul (3 days)
+
+Calendar
+----
+If everything goes smoothly, the trip should take 12 days at a pace of ~120 miles per day.
+At a pace of 150 mpd, it should take little over 9 days.
+Needless to say, I want to save as many days as possible and will try to hit this number in training.
+Of course, I will need to build some buffer into this timeline.
+I should give myself about 15 days (at least) in order to complete the trip.
 
 Water Crossings
 -------
