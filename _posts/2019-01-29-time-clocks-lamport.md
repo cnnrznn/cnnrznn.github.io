@@ -20,3 +20,29 @@ The term is a large umbrella.
 An **event** in the system is the transmission or receipt of a message.
 A **process**, therefore, can be specified by the ordered collection of events that occur during its lifetime.
 
+## Partial Order
+This paper introduces the _happens before_ relationship, one that can be used to define a partial order over a set of events.
+For every pair of events, it can be said that either (1) one events happens before the other, or (2) the events happen concurrently.
+In the latter case, it is impossible to tell which happened first because physical clocks cannot be trusted.
+
+The happens before relationship for two events _a_ and _b_ is represented as a right-facing arrow '->' and is defined by three characteristics as follows:
+
+1. If event _a_ comes before _b_ in the same process, _a -> b_.
+2. If event _a_ is the sending of a message and _b_ is the receiving of the same message, then _a -> b_.
+3. If _a -> b_ and _b -> c_, then _a -> c_.
+
+These three rules give us a partial ordering over the set of events.
+The proof of this is left to the paper and as an exercise for the reader :)
+
+## Logical Clocks
+Now that we have a partial order over events, we can assign a logical time to each event.
+It is natural to write programs that rely on a clock, but in place of a physical time we can simply define some logical clocks based on our relationship.
+
+Specifically, the paper defines a function _C(e)_ which gives the logical time for event _e_ in the distributed system.
+There is but one requirement for this function, that it satisfies the _clock condition_:
+
+`if a->b then C(a) < C(b)`
+
+## Total Order
+
+## Physical Clocks
