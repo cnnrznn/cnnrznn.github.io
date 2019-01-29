@@ -83,10 +83,10 @@ author:
   name             : "Connor Zanin"
   avatar           : "Zanin_Connor.png"
   bio              :
-  location         : "Boston, MA"
+  location         :
   employer         : "Northeastern University"
   googlescholar    :
-  email            :
+  email            : zanin@ccs.neu.edu
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
