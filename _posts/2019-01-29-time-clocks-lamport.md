@@ -39,10 +39,34 @@ Now that we have a partial order over events, we can assign a logical time to ea
 It is natural to write programs that rely on a clock, but in place of a physical time we can simply define some logical clocks based on our relationship.
 
 Specifically, the paper defines a function _C(e)_ which gives the logical time for event _e_ in the distributed system.
-There is but one requirement for this function, that it satisfies the _clock condition_:
+There is but one requirement for this function, that it satisfies the _clock condition_ :
 
 `if a->b then C(a) < C(b)`
 
+This clock function can be defined by two rules:
+
+1. A process increments its clock before sending a message.
+2. A process receives a message, and then sets its clock to the maximum of:
+  - its current clock plus one
+  - the timestamp of the received message plus one
+
+With these two rules, our clock function satisfies the clock condition.
+Again, left as an excercise to the reader to prove this.
+
 ## Total Order
 
+Now that we have a partial ordering in terms of clock values (you can create scenarios where two events have the same value), we can define an arbitrary, deterministic _total ordering over all events.
+A trivial yet powerful method is to assign every process an identifier.
+When two events have the same clock value, they must have been executed on different processes.
+Therefore, we can order events by sorting again these events by their PID.
+
+The paper does not define the ordering among processes, only that such an ordering exists; PIDs are a simple way to accomplish this.
+
+The paper wraps up this section by using the total ordering property to solve distributed mutual exclusion.
+I don't want to discuss it here because it reads more like a motivation for distributed total ordering than a core contribution of the paper.
+
 ## Physical Clocks
+
+The method of total ordering can be further extended to synchronize distributed processes to some phyisical time, within some bound.
+
+# Conclusion
