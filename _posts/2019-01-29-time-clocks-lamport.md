@@ -75,7 +75,7 @@ So, the paper presents the _strong clock condition_, which is equivalent to the 
 
 The paper presents two properties of a physical clock:
 
-PC1: There exists some constant _k_ such that the physical clock rate for any process is one plus or minus k.
-PC2: There exists some constant _e_ such that the absolute difference in clock rate between two processes is less than e.
+* PC1: There exists some constant _k_ such that the physical clock rate for any process is one plus or minus k.
+* PC2: There exists some constant _e_ such that the absolute difference in clock rate between two processes is less than e.
 
 # Conclusion
