@@ -69,4 +69,13 @@ I don't want to discuss it here because it reads more like a motivation for dist
 
 The method of total ordering can be further extended to synchronize distributed processes to some phyisical time, within some bound.
 
+In our logical system, the clock condition holds for events occuring within the system but says nothing about external events.
+Indeed, the paper presents a scenario where an external event happens before another, but according to the system the inputs may happen concurrently or in reverse.
+So, the paper presents the _strong clock condition_, which is equivalent to the clock condition but also considers relevant external events to the system.
+
+The paper presents two properties of a physical clock:
+
+PC1: There exists some constant _k_ such that the physical clock rate for any process is one plus or minus k.
+PC2: There exists some constant _e_ such that the absolute difference in clock rate between two processes is less than e.
+
 # Conclusion
