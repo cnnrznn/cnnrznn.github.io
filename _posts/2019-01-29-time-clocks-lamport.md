@@ -45,8 +45,8 @@ There is but one requirement for this function, that it satisfies the _clock con
 
 This clock function can be defined by two rules:
 
-1. A process increments its clock before sending a message.
-2. A process receives a message, and then sets its clock to the maximum of:
+* IR1. A process increments its clock before sending a message.
+* IR2. A process receives a message, and then sets its clock to the maximum of:
   - its current clock plus one
   - the timestamp of the received message plus one
 
@@ -78,4 +78,18 @@ The paper presents two properties of a physical clock:
 * PC1: There exists some constant _k_ such that the physical clock rate for any process is one plus or minus k.
 * PC2: There exists some constant _e_ such that the absolute difference in clock rate between two processes is less than e.
 
+The paper proceeds to present an algorithm for setting physical clocks which is similar to the rules IR1 and IR2.
+The proof for this algorithm is included in the paper.
+Basically, the observation is that given some minimal propagation time in between a message send and receive, we can bump the local clock to the maximum of the current time or the time the message was sent plus the minimal propagation time.
+In this way, messages passively synchronize the clocks of the nodes in the system.
+
 # Conclusion
+This paper presents a simple problem with a simple solution and profound impact.
+One of the core problems in distributed systems is consensus, and this paper presents a solution for consensus among a set of events.
+In distributed systems, even the mere problem of ordering events is difficult and non-trivial.
+The paper raises a red flag and warns us that even simple assumptions are dangerous within [distributed] systems.
+
+From logical clocks we can build many other distributed system primitives, such as atomic broadcast,commit protocols, consensus algorithms, and much more!
+
+At the time of writing, the paper has over 11,000 citations.
+This speaks to how influential the work is within the distributed systems community and how prolific the problem of time is to the field.
