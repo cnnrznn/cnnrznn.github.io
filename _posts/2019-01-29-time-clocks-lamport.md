@@ -5,7 +5,7 @@ categories:
   - distributed systems
 ---
 
-In the paper _Time, Clocks, and the Ordering of Events in a Distributed System, Leslie Lamport defines the _happens before_ relationship for distributed systems.
+In the paper _Time, Clocks, and the Ordering of Events in a Distributed System_, Leslie Lamport defines the _happens before_ relationship for distributed systems.
 This is a seminal work that is fundamental to the understanding of distributed systems.
 It addresses the simple yet profound problem of answering the question, "What happened when?"
 This is an overview of that paper and a summary of the key ideas.
