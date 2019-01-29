@@ -89,7 +89,7 @@ One of the core problems in distributed systems is consensus, and this paper pre
 In distributed systems, even the mere problem of ordering events is difficult and non-trivial.
 The paper raises a red flag and warns us that even simple assumptions are dangerous within [distributed] systems.
 
-From logical clocks we can build many other distributed system primitives, such as atomic broadcast,commit protocols, consensus algorithms, and much more!
+From logical clocks we can build many other distributed system primitives, such as atomic broadcast, commit protocols, consensus algorithms, and much more!
 
 At the time of writing, the paper has over 11,000 citations.
 This speaks to how influential the work is within the distributed systems community and how prolific the problem of time is to the field.
