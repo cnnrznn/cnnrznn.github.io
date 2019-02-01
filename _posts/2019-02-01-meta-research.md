@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "How to Do Research Meta Discussion"
+title:  "_How to Do Research_ Meta Discussion"
 categories: 
   - academia
 ---
