@@ -63,3 +63,17 @@ Then, I did what should have been my first step and read the `README.txt` in the
 For changes to affect the network, I had to re-`generate.sh` several components, incuding the _configuration block_ for the channel.
 
 Once I did this, my configuration changes took effect and I was getting fast transactions (fast enough for a game)!
+By simply changing the block configuration, I could achieve updates every 50ms, or 20 fps.
+Granted, this is slow for a game, but for pong it may be usable.
+
+## The Inspiration
+This game was meant as a way for me to play around with hyperledger, develop an application, configure a network, and learn the architecture.
+After starting this project, I also discovered [1] from the research team over at IBM.
+They make more optimizations, but the core idea is the same, _latency favored over throughput_.
+
+## Conclusion
+With the advent of popular _permission-based_ blockchains and a wider variety of deployment cases, there is a push to _centralize_ a technology that was once imagined to be the solution to a _decentralized problem_.
+However, the consensus problem is not a new one; the use cases for a consensus system have a larger scope than anonymous banking (and don't incur as many costs!).
+Hyperledger Fabric represents and interesting point in the design space which favors flexibility and configuration of rigitity.
+Crucially, we can exploit this configurability to implement an application which achieves consensus while optimizing for latency.
+In the end, I created a toy project to show how one might realize a latency-optimized application.
