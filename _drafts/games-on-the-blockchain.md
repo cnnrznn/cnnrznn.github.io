@@ -37,3 +37,27 @@ This option can be set in the network's _configtx.yaml_ file under the `BlockSiz
 
 After playing with these settings, I realized that the options don't seem to have an effect on the latency.
 By default, and with lower (and higher) values for block size and block timeout, the transaction to update the game state (move a paddle) processes in around two seconds.
+To find the source of the error, without getting into (too much) source code, I need the logs.
+
+#### Logging
+The system is run in docker containers.
+The output from the services (containerized apps) can be inspected with
+```
+docker logs -f <container>
+```
+The `-f` option means to "follow" the output, i.e. don't print and quit.
+
+Initially, the logging output by the containers is not terribly useful.
+In the orderer, I get no such output per transaction.
+This is a problem, because the limited output from the peer (validator) indicates the latency is coming from the orderer.
+
+![Peer Log Default](images/games-on-the-blockchain/peer_log0.png)
+
+We can enhance the logging output from the orderer and peer by setting the `FABRIC_LOGGING_SPEC` environment variable via the `docker-compose.yml` file.
+
+_Two hours later..._
+
+After fiddling around with the parameters for a while, I was getting nowhere.
+The rate of transactions wasn't changing and the logging output was stuck at it's default level.
+Then, I did what should have been my first step and read the `README.txt` in the `basic-network` directory.
+
