@@ -60,4 +60,6 @@ _Two hours later..._
 After fiddling around with the parameters for a while, I was getting nowhere.
 The rate of transactions wasn't changing and the logging output was stuck at it's default level.
 Then, I did what should have been my first step and read the `README.txt` in the `basic-network` directory.
+For changes to affect the network, I had to re-`generate.sh` several components, incuding the _configuration block_ for the channel.
 
+Once I did this, my configuration changes took effect and I was getting fast transactions (fast enough for a game)!
