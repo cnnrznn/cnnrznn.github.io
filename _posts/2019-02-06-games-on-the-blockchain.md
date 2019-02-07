@@ -52,7 +52,7 @@ This is a problem, because the limited output from the peer (validator) indicate
 
 We can enhance the logging output from the orderer and peer by setting the `FABRIC_LOGGING_SPEC` environment variable via the `docker-compose.yml` file.
 
-_Two hours later..._
+## _Two hours later..._
 
 After fiddling around with the parameters for a while, I was getting nowhere.
 The rate of transactions wasn't changing and the logging output was stuck at it's default level.
@@ -68,7 +68,7 @@ Granted, this is slow for a game, but for pong it may be usable.
 ## The Inspiration
 This game was meant as a way for me to play around with hyperledger, develop an application, configure a network, and learn the architecture.
 After starting this project, I also discovered [StreamChain][1] from the same team behind Hyperledger Fabric.
-They make more optimizations, but the core idea is the same, _latency favored over throughput_.
+They make more optimizations, but the core idea is the same, favor _latency_ over _throughput_.
 
 ## Conclusion
 With the advent of popular _permission-based_ blockchains and a wider variety of deployment cases, there is a push to _centralize_ a technology that was once imagined to be the solution to a _decentralized problem_.
