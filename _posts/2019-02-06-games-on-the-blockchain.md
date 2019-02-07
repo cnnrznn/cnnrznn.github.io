@@ -65,6 +65,12 @@ Granted, this is slow for a game, but for pong it may be usable.
 
 ![Peer Log New1](/images/games-on-the-blockchain/peer_log1.png)
 
+The code for the project can be found at [https://github.com/cnnrznn/fabric-samples.git][2].
+The changes can be found in three places.
+First, the `basic-network` configurations were changed to reduce the maximum block size to 1.
+Second, the chaincode (`chaincode/fabcar/javascript/lib/fabcar.js`) was edited to offer properly named transactions for the game.
+Third, the client application (`fabcar/javascript/`) was editied to make use of the new chaincode.
+
 ## The Inspiration
 This game was meant as a way for me to play around with hyperledger, develop an application, configure a network, and learn the architecture.
 After starting this project, I also discovered [StreamChain][1] from the same team behind Hyperledger Fabric.
@@ -78,3 +84,4 @@ Crucially, we can exploit this configurability to implement an application which
 In the end, I created a toy project to show how one might realize a latency-optimized application.
 
 [1]: https://arxiv.org/pdf/1808.08406.pdf
+[2]: https://github.com/cnnrznn/fabric-samples.git
