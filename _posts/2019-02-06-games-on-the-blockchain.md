@@ -12,9 +12,6 @@ However, IBM's recent work _Hyperledger Fabric_ presents a "distributed operatin
 An operating system you say?
 Let's see if there is some truth to this meme by implementing Pong on the blockchain.
 
-The tools
-======
-
 Hyperledger Fabric
 ----
 Hyperledger _Fabric_ is an exciting new work from IBM that separate the blockchain from the application.
@@ -65,6 +62,8 @@ For changes to affect the network, I had to re-`generate.sh` several components,
 Once I did this, my configuration changes took effect and I was getting fast transactions (fast enough for a game)!
 By simply changing the block configuration, I could achieve updates every 50ms, or 20 fps.
 Granted, this is slow for a game, but for pong it may be usable.
+
+![Peer Log New1](/images/games-on-the-blockchain/peer_log1.png)
 
 ## The Inspiration
 This game was meant as a way for me to play around with hyperledger, develop an application, configure a network, and learn the architecture.
