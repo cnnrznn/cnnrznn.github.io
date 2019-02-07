@@ -51,7 +51,7 @@ Initially, the logging output by the containers is not terribly useful.
 In the orderer, I get no such output per transaction.
 This is a problem, because the limited output from the peer (validator) indicates the latency is coming from the orderer.
 
-![Peer Log Default](https://connorzanin.com/images/games-on-the-blockchain/peer_log0.png)
+![Peer Log Default](/images/games-on-the-blockchain/peer_log0.png)
 
 We can enhance the logging output from the orderer and peer by setting the `FABRIC_LOGGING_SPEC` environment variable via the `docker-compose.yml` file.
 
@@ -68,7 +68,7 @@ Granted, this is slow for a game, but for pong it may be usable.
 
 ## The Inspiration
 This game was meant as a way for me to play around with hyperledger, develop an application, configure a network, and learn the architecture.
-After starting this project, I also discovered [1][1] from the same team behind Hyperledger Fabric.
+After starting this project, I also discovered [StreamChain][1] from the same team behind Hyperledger Fabric.
 They make more optimizations, but the core idea is the same, _latency favored over throughput_.
 
 ## Conclusion
