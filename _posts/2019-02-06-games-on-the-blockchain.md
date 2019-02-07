@@ -68,7 +68,7 @@ Granted, this is slow for a game, but for pong it may be usable.
 
 ## The Inspiration
 This game was meant as a way for me to play around with hyperledger, develop an application, configure a network, and learn the architecture.
-After starting this project, I also discovered [1] from the research team over at IBM.
+After starting this project, I also discovered [1][1] from the same team behind Hyperledger Fabric.
 They make more optimizations, but the core idea is the same, _latency favored over throughput_.
 
 ## Conclusion
@@ -77,3 +77,5 @@ However, the consensus problem is not a new one; the use cases for a consensus s
 Hyperledger Fabric represents and interesting point in the design space which favors flexibility and configuration of rigitity.
 Crucially, we can exploit this configurability to implement an application which achieves consensus while optimizing for latency.
 In the end, I created a toy project to show how one might realize a latency-optimized application.
+
+[1]: https://arxiv.org/pdf/1808.08406.pdf
