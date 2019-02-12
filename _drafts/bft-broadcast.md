@@ -18,7 +18,7 @@ Specifically, a broadcast protocol that guarantees all process accept the same v
 
 In this instance we consider the _byzantine fault model_.
 That is, participants in our distributed system can behave arbitrarily.
-Our only 00 is that _honest_ participants - peers from here on - obey the protocol.
+Our only assumption is that _honest_ peers obey the protocol.
 
 The other type of failure model usually considered is that of the network.
 That is out of scope for this article.
@@ -37,15 +37,16 @@ The solution to the broadcast problem is to insert another layer in the stack: a
 The goal of the primitive is to reduce the power of byzantine processes to that of fail-stop processes.
 Two properties must hold for a process _p_ broadcasting message *v*:
 
-1. **Validity** If *p* is correct, all correct processes agree on *v*
+1. **Validity** If *p* is correct, all correct processes `Accept` *v*
 2. **Agreement** If *p* is faulty, then either all correct processes agree on the same value, or no value is accepted from *p*
 
-This protocol is inspired by an old paper by Gabriel Bracha _[Asynchronous Byzantine Agreement Protocols](https://core.ac.uk/download/pdf/82523202.pdf)_.
+This protocol comes from an old paper by Gabriel Bracha _[Asynchronous Byzantine Agreement Protocols](https://core.ac.uk/download/pdf/82523202.pdf)_.
 After establishing this primitive, Bracha uses it to achieve a randomized consensus algorithm resilient to *n >= 3f+1* faults!
 
-The protocol has 2 stages:
-1. The owner broadcasts its message to all peers
-2. The peers perform one round of all-to-all communication to decide an outcome
+The protocol has 3 phases:
+1. The initiator broadcasts its message to all peers
+2. The peers echo this message to indicate what they *think* the value is
+3. The peers send ready messages to indicate a commit
 
 ### Message Format
 The messages in the system have four components
