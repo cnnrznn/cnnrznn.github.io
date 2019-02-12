@@ -18,7 +18,7 @@ Specifically, a broadcast protocol that guarantees all process accept the same v
 
 In this instance we consider the _byzantine fault model_.
 That is, participants in our distributed system can behave arbitrarily.
-Our only gaurantee is that _honest_ participants - peers from here on - obey the protocol.
+Our only 00 is that _honest_ participants - peers from here on - obey the protocol.
 
 The other type of failure model usually considered is that of the network.
 That is out of scope for this article.
@@ -41,7 +41,7 @@ Two properties must hold for a process _p_ broadcasting message *v*:
 2. **Agreement** If *p* is faulty, then either all correct processes agree on the same value, or no value is accepted from *p*
 
 This protocol is inspired by an old paper by Gabriel Bracha _[Asynchronous Byzantine Agreement Protocols](https://core.ac.uk/download/pdf/82523202.pdf)_.
-After establishing this primitive, bracha uses it to achieve a randomized consensus algorithm resilient to *n >= 3f+1* faults!
+After establishing this primitive, Bracha uses it to achieve a randomized consensus algorithm resilient to *n >= 3f+1* faults!
 
 The protocol has 2 stages:
 1. The owner broadcasts its message to all peers
@@ -59,7 +59,7 @@ The sender indicates from whom the current message was sent.
 The round is a number used to totally order broadcasts from a single process.
 The value is the proposed result of the broadcast.
 
-It should be noted that in a production environment, messages should be authenticated with cyptographic signatures.
+It should be noted that in a production environment, messages should be authenticated with cryptographic signatures.
 For this implementation, it is sufficient for demonstration and testing to assign messages the `owner` and `sender` fields as integers.
 
 ### Message Filtering
@@ -79,7 +79,7 @@ Once we have messages for a particular round and owner from `2f+1` unique sender
 
 ### Message Echo
 How are messages propagated in the protocol?
-When an owner intiates the broadcast protocol, the `owner` and `sender` fields will match.
+When an owner initiates the broadcast protocol, the `owner` and `sender` fields will match.
 This is the indication to a peer that it should `echo` the message to other peers.
 
 In a byzantine environment, it is not guaranteed that the broadcaster is honest.
