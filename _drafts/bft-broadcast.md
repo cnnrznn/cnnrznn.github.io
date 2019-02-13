@@ -50,18 +50,18 @@ The protocol has 3 phases:
 
 ### Message Format
 The messages in the system have four components
-* `owner`
-* `sender`
-* `round`
-* `value`
+* `sender`- process identifier
+* `round` - round identifier
+* `value` - payload
+* `type` - *initial*, *echo*, *ready*
 
-The owner of the message is the process that initiated the broadcast protocol.
-The sender indicates from whom the current message was sent.
+The sender indicates the initiator of the broadcast protocol.
 The round is a number used to totally order broadcasts from a single process.
 The value is the proposed result of the broadcast.
+The type of the message indicates in what phase of the protocol the message was sent.
 
 It should be noted that in a production environment, messages should be authenticated with cryptographic signatures.
-For this implementation, it is sufficient for demonstration and testing to assign messages the `owner` and `sender` fields as integers.
+For this implementation, it is sufficient for demonstration and testing to assign messages the `sender` field as an integer.
 
 ### Message Filtering
 In order to make a decision, each process must accept a number of other messages.
