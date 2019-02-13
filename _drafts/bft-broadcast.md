@@ -48,6 +48,46 @@ The protocol has 3 phases:
 2. The peers echo this message to indicate what they *think* the value is
 3. The peers send ready messages to indicate a commit
 
+## Phases
+
+### Initial
+The sender simply broadcasts its message to the peers.
+
+If you are following along in the code See the functions `bracha-broadcast`.
+
+### Echo
+All peers wait for either
+1. `1` `initial` message
+2. `2f+1` `echo` messages
+3. `f+1` `ready` messages
+
+When any of these occur, the process broadcasts an `echo` messages to all peers.
+
+For the peer, a single initial message is sufficient to echo the value.
+However, if we want to send an `echo` based on *other echo messages*, we need to wait for `2f+1` echoes.
+Why?
+If we have `2f+1` matching echoes, we know that a minimum of `f+1` honest peers have also sent an echo for the same value.
+This means that a majority of honest nodes *must have received the same `initial` message*.
+
+Likewise, we can send an echo if we have heard `f+1` ready messages.
+Why do we need `2f+1` echoes but only `f+1` ready messages?
+In order to send a ready message, a correct process must have received `2f+1` echo messages.
+So, we can use the fact that *at least one* correct process has received enough echoes in order to send our own.
+
+### Ready
+All processes wait for
+1. `2f+1` echo messages
+2. `f+1` ready messages
+
+As above, these qualities indicate that a majority of honest nodes have received the same initial message, and therefore the same value.
+Once either of these are fulfilled, the process broadcasts a `ready` message.
+
+### Accept
+Finally, the process waits for `2f+1` ready messages.
+Once it has them, it knows a majority of hones nodes are also planning to accept the value.
+
+## Implementation Details
+
 ### Message Format
 The messages in the system have four components
 * `sender`- process identifier
@@ -78,19 +118,4 @@ The message must:
 These two requirements guarantee that we only accept one message for a particular round, sender, and owner.
 Once we have messages for a particular round and owner from `2f+1` unique senders, we make a decision.
 
-### Message Echo
-How are messages propagated in the protocol?
-When an owner initiates the broadcast protocol, the `owner` and `sender` fields will match.
-This is the indication to a peer that it should `echo` the message to other peers.
-
-In a byzantine environment, it is not guaranteed that the broadcaster is honest.
-Therefore, peers must echo what they have heard from the broadcaster to other peers.
-Once each process has enough information, it can make a decision.
-
-### Decision
-The trickiest part of the broadcast protocol is the decision.
-According to our fault model, we _must_ make progress after receiving `2f+1` messages.
-The question is, how many of those messages must contain the same value in order to accept the value?
-
-I posit that all `2f+1` messages must contain the same value.
-Suppose that a process makes a decision after receiving `2f` of the same value
+## Conclusion
