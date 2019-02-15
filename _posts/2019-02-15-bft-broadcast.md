@@ -32,6 +32,13 @@ The code for this post is located in the `src/clj_net/broadcast.clj` file.
 The project is written in Clojure which is a beautiful functional language that is also practical as it runs on the JVM and has access to the Java ecosystem.
 If you wish to run the code, you'll need [Leiningen](https://leiningen.org/).
 
+Throughout the code you will see a number of functions with the suffix `-func`.
+This is my naming convention for functions that return functions.
+Specifically, for this protocol I wanted to parameterize certain functions by the current `initiator` and `round`.
+This way, I don't have to pass them as parameters every time.
+For example, by calling `(validate-func initiator round)` I create a `validate` function that only accepts messages tagged with that initiator and round.
+Neat!
+
 ## The Solution
 The solution to the broadcast problem is to insert another layer in the stack: a reliable broadcast primitive.
 The goal of the primitive is to reduce the power of byzantine processes to that of fail-stop processes.
@@ -53,7 +60,7 @@ The protocol has 3 phases:
 ### Initial
 The sender simply broadcasts its message to the peers.
 
-If you are following along in the code See the functions `bracha-broadcast`.
+If you are following along in the code See the functions `broadcast-func`.
 
 ### Echo
 All peers wait for either
@@ -90,7 +97,8 @@ Once it has them, it knows a majority of hones nodes are also planning to accept
 
 ### Message Format
 The messages in the system have four components
-* `sender`- process identifier
+* `initiator`- protocol initiator
+* `sender` - PID of *this* message
 * `round` - round identifier
 * `value` - payload
 * `type` - *initial*, *echo*, *ready*
@@ -103,19 +111,11 @@ The type of the message indicates in what phase of the protocol the message was 
 It should be noted that in a production environment, messages should be authenticated with cryptographic signatures.
 For this implementation, it is sufficient for demonstration and testing to assign messages the `sender` field as an integer.
 
-### Message Filtering
-In order to make a decision, each process must accept a number of other messages.
-Under the byzantine fault model, typically a process waits for `2f+1` messages.
-Recall that the maximum number of faulty processes in a consensus system is `n >= 3f+1`.
-Therefore, we are guaranteed a _minimum_ of `2f+1` messages arriving, and must progress after they do.
+## Future Work
+At the time of writing there are a number of limitations that the code has which I'm not sure if I will have time to address.
 
-But which messages do we wait for?
-In the `validate` function, we see that there are a few requirements for accepting a new message.
-The message must:
-* belong to the same round
-* be the first message from a particular sender and owner
-
-These two requirements guarantee that we only accept one message for a particular round, sender, and owner.
-Once we have messages for a particular round and owner from `2f+1` unique senders, we make a decision.
+1. No retransmission (`core.clj`)
+2. Messages for different `(initiator, round)` pairs are simply forgotten
+3. No proper authentication
 
 ## Conclusion
