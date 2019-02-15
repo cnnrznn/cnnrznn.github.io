@@ -64,7 +64,7 @@ The protocol has 3 phases:
 ### Initial
 The sender simply broadcasts its message to the peers.
 
-If you are following along in the code See the functions `broadcast-func`.
+If you are following along in the code See the function `broadcast-func`.
 
 ### Echo
 All peers wait for either
