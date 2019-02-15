@@ -68,33 +68,33 @@ If you are following along in the code See the function `broadcast-func`.
 
 ### Echo
 All peers wait for either
-1. `1` `initial` message
-2. `2f+1` `echo` messages
-3. `f+1` `ready` messages
+1. $1$ `initial` message
+2. $2f+1$ `echo` messages
+3. $f+1$ `ready` messages
 
 When any of these occur, the process broadcasts an `echo` messages to all peers.
 
 For the peer, a single initial message is sufficient to echo the value.
-However, if we want to send an `echo` based on *other echo messages*, we need to wait for `2f+1` echoes.
+However, if we want to send an `echo` based on *other echo messages*, we need to wait for $2f+1$ echoes.
 Why?
-If we have `2f+1` matching echoes, we know that a minimum of `f+1` honest peers have also sent an echo for the same value.
+If we have $2f+1$ matching echoes, we know that a minimum of $f+1$ honest peers have also sent an echo for the same value.
 This means that a majority of honest nodes *must have received the same `initial` message*.
 
-Likewise, we can send an echo if we have heard `f+1` ready messages.
-Why do we need `2f+1` echoes but only `f+1` ready messages?
-In order to send a ready message, a correct process must have received `2f+1` echo messages.
+Likewise, we can send an echo if we have heard $f+1$ ready messages.
+Why do we need $2f+1$ echoes but only $f+1$ ready messages?
+In order to send a ready message, a correct process must have received $2f+1$ echo messages.
 So, we can use the fact that *at least one* correct process has received enough echoes in order to send our own.
 
 ### Ready
 All processes wait for
-1. `2f+1` echo messages
-2. `f+1` ready messages
+1. $2f+1$ echo messages
+2. $f+1$ ready messages
 
 As above, these qualities indicate that a majority of honest nodes have received the same initial message, and therefore the same value.
 Once either of these are fulfilled, the process broadcasts a `ready` message.
 
 ### Accept
-Finally, the process waits for `2f+1` ready messages.
+Finally, the process waits for $2f+1$ ready messages.
 Once it has them, it knows a majority of hones nodes are also planning to accept the value.
 
 ## Implementation Details
