@@ -32,6 +32,10 @@ The code for this post is located in the `src/clj_net/broadcast.clj` file.
 The project is written in Clojure which is a beautiful functional language that is also practical as it runs on the JVM and has access to the Java ecosystem.
 If you wish to run the code, you'll need [Leiningen](https://leiningen.org/).
 
+For testing, I have a Dockerfiles located in `test/docker`.
+First, build the image from `context-base` as `base`, then build the image from `context` as `bb` (or edit `run-container.sh`).
+Finally, you need to create a custom network so the `run-container.sh` script can assign static IP's.
+
 Throughout the code you will see a number of functions with the suffix `-func`.
 This is my naming convention for functions that return functions.
 Specifically, for this protocol I wanted to parameterize certain functions by the current `initiator` and `round`.
