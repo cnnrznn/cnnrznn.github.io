@@ -17,7 +17,7 @@ The problem we are trying to solve is that of _reliable broadcast_.
 Specifically, we want a broadcast protocol that guarantees all processes accept the same value (or none) as the result of a broadcast within a closed group.
 
 In this instance we consider the _byzantine fault model_.
-That is, participants in our distributed system can behave arbitrarily.
+That is, in a system of $$n$$ processes, $$n >= 3f+1$$, where $$f$$ faulty processes can behave arbitrarilty.
 Our only assumption is that _honest_ peers obey the protocol.
 
 The other type of failure model usually considered is that of the network.
