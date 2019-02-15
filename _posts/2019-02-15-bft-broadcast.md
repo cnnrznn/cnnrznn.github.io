@@ -14,7 +14,7 @@ In this article, I give a summary and implementation of an algorithm for overcom
 
 ## The Problem
 The problem we are trying to solve is that of _reliable broadcast_.
-Specifically, a broadcast protocol that guarantees all process accept the same value (or none) as the result of a broadcast within a closed group.
+Specifically, we want a broadcast protocol that guarantees all processes accept the same value (or none) as the result of a broadcast within a closed group.
 
 In this instance we consider the _byzantine fault model_.
 That is, participants in our distributed system can behave arbitrarily.
