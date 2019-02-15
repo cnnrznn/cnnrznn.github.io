@@ -27,7 +27,7 @@ Later, I will show how the implementation copes with messages from dishonest (by
 Then we will see that exactly-once delivery of messages from honest peers is nice, but not required.
 
 ## The Code
-If you would like to follow along during this post, the code can be found at [https://github.com/cnnrznn/clj-net.git]().
+If you would like to follow along during this post, the code can be found at [https://github.com/cnnrznn/clj-net.git](https://github.com/cnnrznn/clj-net.git).
 The code for this post is located in the `src/clj_net/broadcast.clj` file.
 The project is written in Clojure which is a beautiful functional language that is also practical as it runs on the JVM and has access to the Java ecosystem.
 If you wish to run the code, you'll need [Leiningen](https://leiningen.org/).
