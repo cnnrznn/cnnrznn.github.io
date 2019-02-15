@@ -123,3 +123,16 @@ At the time of writing there are a number of limitations that the code has which
 3. No proper authentication
 
 ## Conclusion
+In this post, I summarize and present the implementation for a byzantine resilient broadcast protocol.
+The protocol consists of three phases which guarantee that all correct (honest) nodes either receive the same value or no value at all.
+It also guarantees that if the broadcasting process is correct, the value is guaranteed to be received and accepted by all other correct processes (under our system assumptions).
+This reliable broadcast primitive can be used to implement other distributed protocols, such as _atomic broadcast_.
+
+Implementing this protocol was helpful towards realizing what details are left out by the paper, and what other assumptions cannot remain simply that.
+For example, papers can claim "messages get delivered eventually" which is helpful to precisely $0$ implementations.
+Now you're saying to yourself, "Wait a second, you said this was for future work?"
+Precisely.
+My implementation will probably break under the slightest perturbation.
+
+Enjoy.
+Maybe some day I'll get around to making this robust ;)
