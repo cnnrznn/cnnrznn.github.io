@@ -42,13 +42,13 @@ Neat!
 ## The Solution
 The solution to the broadcast problem is to insert another layer in the stack: a reliable broadcast primitive.
 The goal of the primitive is to reduce the power of byzantine processes to that of fail-stop processes.
-Two properties must hold for a process _p_ broadcasting message *v*:
+Two properties must hold for a process $p$ broadcasting message $v$:
 
-1. **Validity** If *p* is correct, all correct processes `Accept` *v*
-2. **Agreement** If *p* is faulty, then either all correct processes agree on the same value, or no value is accepted from *p*
+1. **Validity** If $p$ is correct, all correct processes `accept` $v$
+2. **Agreement** If $p$ is faulty, then either all correct processes `accept` the same value, or no value is accepted from $p$
 
 This protocol comes from an old paper by Gabriel Bracha _[Asynchronous Byzantine Agreement Protocols](https://core.ac.uk/download/pdf/82523202.pdf)_.
-After establishing this primitive, Bracha uses it to achieve a randomized consensus algorithm resilient to *n >= 3f+1* faults!
+After establishing this primitive, Bracha uses it to achieve a randomized consensus algorithm resilient to $n \geq 3f+1$ faults!
 
 The protocol has 3 phases:
 1. The initiator broadcasts its message to all peers
