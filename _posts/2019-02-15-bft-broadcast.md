@@ -101,8 +101,8 @@ Once it has them, it knows a majority of hones nodes are also planning to accept
 
 ### Message Format
 The messages in the system have four components
-* `initiator`- protocol initiator
-* `sender` - PID of *this* message
+* `initiator`- PID of the protocol initiator
+* `sender` - PID of the sender of *this* message
 * `round` - round identifier
 * `value` - payload
 * `type` - *initial*, *echo*, *ready*
