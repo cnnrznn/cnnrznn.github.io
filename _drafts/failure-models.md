@@ -19,3 +19,4 @@ In this article, I present a survey of the different failure models used in dist
 * network reliability
 * synchrony
 * signatures
+* scheduling
