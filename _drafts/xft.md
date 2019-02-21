@@ -24,6 +24,11 @@ This paper presents a technique that achieves _higher resilience_ than CFT while
 ## Algorithm
 
 ### Overview
+XPaxos operates in a sequence of _views_.
+In each view, the protocol proceeds in _normal_ mode, accepting and commiting transactions from clients.
+In each view, $t+1$ replicas form a *synchronous group* where transactions are *actively* replicated within the group, and *lazily* replicated on replicas outside the group.
+If a fault is detected within the group, a *view change* is initiated.
 
+During a view change, a new synchronous group is chosen, and replicas from the old group transfer data about their *commit log* to members of the new group.
 
 ## Conclusion
