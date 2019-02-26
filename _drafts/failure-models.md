@@ -44,19 +44,19 @@ loop:
 ```
 
 Processing faults (process faults, node faults) occur at the nodes of the system, where the *execution* of the above code is performed.
-The failure model in which no faults occur is sometimes reffered to as the **benign** failure model.
+The failure model in which no faults occur is sometimes reffered to as the ***benign*** failure model.
 Put another way, processes can be said to be *correct*, *honest*, or *benign* if they operate according to the benign failure model.
 This is the strongest assumption, and also the least attainable in practice.
 Under the benign failure model, all processes operate exactly according to the protocol for the duration of the run.
 
-The next kind of processing failure model is the **crash** failure model.
+The next kind of processing failure model is the ***crash*** failure model.
 The crash model is weaker than the benign model.
 Under the crash model, processes execute according to the protocol.
 At some point during the run, an evil gremlin comes along and sends `SIGKILL` to the processes.
 For the rest of the run, the process does no work and does not send any messages.
 In other words, processes can die, but before they die they are perfect little angels that can do no wrong (only the good die young).
 
-The final kind of processing failure model is the **byzantine** failure model.
+The final kind of processing failure model is the ***byzantine*** failure model.
 This model is the weakest of the three, but most closely echoes reality.
 Under the byzantine failure model, processes are allowed to execute arbitrarily.
 Processes can decide to follow the protocol, if they want to, but maybe they won't if they're having a bad day.
