@@ -71,4 +71,4 @@ However, any real implementation *must* dive deep into this assumption of a "rel
 What does that mean?
 How will we cope?
 
-In general, a reliable channel needs to cope with 4 classes of packet failure: ***Loss*** (Drop), ***Duplication***, ***Delay***, ***Re-order***.
+In general, a reliable channel needs to cope with 4 classes of packet failure: ***Drop***, ***Duplication***, ***Delay***, ***Disorder***.
