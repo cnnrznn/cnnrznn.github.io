@@ -83,6 +83,7 @@ These questions must be answered in a correct implementation.
 The other options is to build the protocol on top of an unreliable channel, for example UDP.
 To build a reliable channel one needs to cope with 4 classes of message failure: ***Delay***, ***Disorder***, ***Duplication***, and ***Drop***.
 In my opinion, these are ordered from least to most severe; I will explain.
+
 Delay is characterized by a message incuring some extra time before arrival, independent of normal *transmission* and *propagation* delays.
 
 Drop failures are characterized by the loss of messages.
