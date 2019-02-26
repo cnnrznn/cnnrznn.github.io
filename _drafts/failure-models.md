@@ -62,3 +62,13 @@ Under the byzantine failure model, processes are allowed to execute arbitrarily.
 Processes can decide to follow the protocol, if they want to, but maybe they won't if they're having a bad day.
 Processes can be ***honest***, or they can lie, cheat, collude, time travel, etc.
 In other words, no one can be trusted, and most likely processes are stealing your money for Facebook.
+
+## Networking Faults
+An inumerable amount of papers end their list of assumptions with, "we assume a reliable message-passing channel where messages are eventually delivered."
+Another variant of this sentiment is "the adversary cannot delay messages indefinitiely."
+For obvious reasons, authors restrict the scope of their paper to the details of the consensus protocol.
+However, any real implementation *must* dive deep into this assumption of a "reliable channel."
+What does that mean?
+How will we cope?
+
+In general, a reliable channel needs to cope with 4 classes of packet failure: ***Loss*** (Drop), ***Duplication***, ***Delay***, ***Re-order***.
