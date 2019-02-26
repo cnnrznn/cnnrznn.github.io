@@ -23,7 +23,7 @@ In this article, I present a survey of the different failure models used in dist
 * scheduling
 
 ### A Note on Lingo
-In distributed systems, often we reduce the system mentally to a collection of *nodes* which represent processes and *edges* which represent the network link(s) between processes.
+In distributed systems, often we reduce the system mentally to a collection of ***nodes*** which represent processes and ***edges*** which represent the network link(s) between processes.
 In the real world, these entities are more complicated than lines and dots.
 However, we can think of them simply as such and charactize the complexity in terms of a failure model.
 Neat-O!
