@@ -71,4 +71,20 @@ However, any real implementation *must* dive deep into this assumption of a "rel
 What does that mean?
 How will we cope?
 
-In general, a reliable channel needs to cope with 4 classes of packet failure: ***Drop***, ***Duplication***, ***Delay***, ***Disorder***.
+Well, one way is to not!
+Like for processing, networking has a benign failure model.
+That is, messages are always delivered exactly once and in a timely manner.
+For a real implementation, this assumption can be realized by implementing on top of an existing reliable channel, for example TCP.
+However, implementations that rely on such components, while they can ignore message-level failures, must address channel-level failures.
+What happens if the channel is shut down?
+How long do you wait to timeout a re-connect?
+These questions must be answered in a correct implementation.
+
+The other options is to build the protocol on top of an unreliable channel, for example UDP.
+To build a reliable channel one needs to cope with 4 classes of message failure: ***Delay***, ***Disorder***, ***Duplication***, and ***Drop***.
+In my opinion, these are ordered from least to most severe; I will explain.
+Delay is characterized by a message incuring some extra time before arrival, independent of normal *transmission* and *propagation* delays.
+
+Drop failures are characterized by the loss of messages.
+Simply, messages are sent but never delivered.
+This can also be imagined as the message having a delay failure until after the end of the run (which may be infinitiely long).
