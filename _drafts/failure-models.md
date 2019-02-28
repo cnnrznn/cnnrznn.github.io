@@ -88,20 +88,20 @@ The other options is to build the protocol on top of an unreliable channel, for 
 To build a reliable channel one needs to cope with 4 classes of message failure: ***Delay***, ***Duplication***, ***Disorder***, and ***Drop***.
 In my opinion, these are ordered from least to most severe; I will explain.
 
-Delay is characterized by a message incuring some extra time before arrival, independent of normal *transmission* and *propagation* delays.
+**Delay** is characterized by a message incuring some extra time before arrival, independent of normal *transmission* and *propagation* delays.
 Importantly, messages under the delay model still arrive by the end of the run.
 Otherwise, the delay failure would actually be a drop failure.
 Delay failure, I argue, is the least severe because a system with delay failure can be transformed into a system with no delay failures but longer propagation delays.
 There are no extra steps necessary to cope with a network experiencing delay failures.
 
-Disorder is the next most severe network failure.
+**Disorder** is the next most severe network failure.
 Under  disorder failure, messages from one node to another may not arrive in FIFO order.
 The solution to this failure is simple.
 A distributed service buffers messages between hosts.
 An application may call a function that retrieves the next message in FIFO order.
 If the service has message $x+1$ but not $x$, the service may block or deliver no message until the message arrives.
 
-Drop failures are characterized by the loss (or non-delivery) of messages.
+**Drop** failures are characterized by the loss (or non-delivery) of messages.
 Simply, messages are sent from the source but never arrive at their destination.
 This can alternatively be imagined as the message having a delay failure until after the end of the run (which may be infinitiely long).
 Drop failures are the most severe, because a possible solution to coping with drop failures is the most complex..
