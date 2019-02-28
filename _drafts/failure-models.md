@@ -94,9 +94,16 @@ Otherwise, the delay failure would actually be a drop failure.
 Delay failure, I argue, is the least severe because a system with delay failure can be transformed into a system with no delay failures but longer propagation delays.
 There are no extra steps necessary to cope with a network experiencing delay failures.
 
+**Duplication** failure occurs when a message is sent twice.
+Imagine that the message is copied by the sender and sent two or more times.
+Duplication is more severe than delay, because the solution to cope with duplication requires some piece of state on the node and in the messages.
+Each message carries a sequence number.
+When a node receives a message, it accepts and delivers that message if the sequence number is the next that is expected.
+If the node's current sequence number is equal to the message's, then it has already received the message and can ignore it.
+
 **Disorder** is the next most severe network failure.
 Under  disorder failure, messages from one node to another may not arrive in FIFO order.
-The solution to this failure is simple.
+The solution to this failure is simple, but requires more state per node than for duplication failure.
 A distributed service buffers messages between hosts.
 An application may call a function that retrieves the next message in FIFO order.
 If the service has message $x+1$ but not $x$, the service may block or deliver no message until the message arrives.
@@ -104,7 +111,7 @@ If the service has message $x+1$ but not $x$, the service may block or deliver n
 **Drop** failures are characterized by the loss (or non-delivery) of messages.
 Simply, messages are sent from the source but never arrive at their destination.
 This can alternatively be imagined as the message having a delay failure until after the end of the run (which may be infinitiely long).
-Drop failures are the most severe, because a possible solution to coping with drop failures is the most complex..
+Drop failures are the most severe, because a possible solution to coping with drop failures is the most complex.
 In all previous network failures, we have not had to make ***re-transmissions***.
 The method for coping with any previous failure can be resolved by making decisions about messages that *exist*.
 Now, we must make decisions about messages that *may or may not* exist.
