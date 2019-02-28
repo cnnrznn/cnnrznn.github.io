@@ -32,6 +32,10 @@ Throughout this piece I may refer to a ***run***.
 A run is simply an execution of a protocol, from start to finish.
 While we could also make assumptions about how components behave outside of a run, here I am restricting the scope to the failure model during a run.
 
+A message is ***delivered*** when it is given to the application for processing.
+Since a distributed system may serve as middleware, it is necessary to distinguish delivered messages from ***received*** messages.
+A received message has arrived at the destination, but not yet delivered to the application.
+
 ## Processing Faults
 A typical distributed protocol is implemented as follows.
 
@@ -81,11 +85,37 @@ How long do you wait to timeout a re-connect?
 These questions must be answered in a correct implementation.
 
 The other options is to build the protocol on top of an unreliable channel, for example UDP.
-To build a reliable channel one needs to cope with 4 classes of message failure: ***Delay***, ***Disorder***, ***Duplication***, and ***Drop***.
+To build a reliable channel one needs to cope with 4 classes of message failure: ***Delay***, ***Duplication***, ***Disorder***, and ***Drop***.
 In my opinion, these are ordered from least to most severe; I will explain.
 
 Delay is characterized by a message incuring some extra time before arrival, independent of normal *transmission* and *propagation* delays.
+Importantly, messages under the delay model still arrive by the end of the run.
+Otherwise, the delay failure would actually be a drop failure.
+Delay failure, I argue, is the least severe because a system with delay failure can be transformed into a system with no delay failures but longer propagation delays.
+There are no extra steps necessary to cope with a network experiencing delay failures.
 
-Drop failures are characterized by the loss of messages.
-Simply, messages are sent but never delivered.
-This can also be imagined as the message having a delay failure until after the end of the run (which may be infinitiely long).
+Disorder is the next most severe network failure.
+Under  disorder failure, messages from one node to another may not arrive in FIFO order.
+The solution to this failure is simple.
+A distributed service buffers messages between hosts.
+An application may call a function that retrieves the next message in FIFO order.
+If the service has message $x+1$ but not $x$, the service may block or deliver no message until the message arrives.
+
+Drop failures are characterized by the loss (or non-delivery) of messages.
+Simply, messages are sent from the source but never arrive at their destination.
+This can alternatively be imagined as the message having a delay failure until after the end of the run (which may be infinitiely long).
+Drop failures are the most severe, because a possible solution to coping with drop failures is the most complex..
+In all previous network failures, we have not had to make ***re-transmissions***.
+The method for coping with any previous failure can be resolved by making decisions about messages that *exist*.
+Now, we must make decisions about messages that *may or may not* exist.
+
+First, messages are marked by sequence number.
+Upon receipt, the sequence number is checked to verify the message is expected to be delivered next.
+If it is, deliver the message.
+If it is not, buffer the message; when the sender sends the missing message, deliver the messages in-order.
+
+## Network Connectivity
+
+## Timing
+
+## Scheduling
