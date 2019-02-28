@@ -108,7 +108,6 @@ Drop failures are the most severe, because a possible solution to coping with dr
 In all previous network failures, we have not had to make ***re-transmissions***.
 The method for coping with any previous failure can be resolved by making decisions about messages that *exist*.
 Now, we must make decisions about messages that *may or may not* exist.
-
 First, messages are marked by sequence number.
 Upon receipt, the sequence number is checked to verify the message is expected to be delivered next.
 If it is, deliver the message.
