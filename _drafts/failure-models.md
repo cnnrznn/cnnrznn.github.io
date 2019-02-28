@@ -13,15 +13,6 @@ For example, we might make assumptions about how processes fail, and others abou
 These assumptions are critical as they provide us with knowledge of the *capabilities* of protocols as well as a means of comparing them.
 In this article, I present a survey of the different failure models used in distributed systems.
 
-## The Consensus Problem in Unreliable Distributed Systems
-* crash faults
-* byzantine faults
-* network connectivity
-* network reliability
-* synchrony
-* signatures
-* scheduling
-
 ### A Note on Lingo
 In distributed systems, often we reduce the system mentally to a collection of ***nodes*** which represent processes and ***edges*** which represent the network link(s) between processes.
 In the real world, these entities are more complicated than lines and dots.
