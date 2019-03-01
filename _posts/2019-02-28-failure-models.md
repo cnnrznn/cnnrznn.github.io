@@ -110,11 +110,3 @@ First, messages are marked by sequence number.
 Upon receipt, the sequence number is checked to verify the message is expected to be delivered next.
 If it is, deliver the message.
 If it is not, buffer the message; when the sender sends the missing message, deliver the messages in-order.
-
-## Network Connectivity
-
-## Timing
-
-## Scheduling
-
-## Signatures
