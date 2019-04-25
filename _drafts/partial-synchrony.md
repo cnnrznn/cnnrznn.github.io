@@ -29,7 +29,22 @@ failure model.
 
 We also make assumptions about how the network delivers messages. On one end of
 the spectrum, we could assume a *synchronous* network. That is that all messages
-are received within some fixed and known upper-bound $\Delta$ from when they
-were sent. On the other end is the *asynchronous* network. An asynchronous
-network may impose arbitrary delays on messages. In other words, $\Delta$ is
-neither fixed nor known.
+are received within some fixed and known upper-bound $\Delta$ from when they are
+sent. On the other end is the *asynchronous* network. An asynchronous network
+may impose arbitrary delays on messages. In other words, $\Delta$ is neither
+fixed nor known.
+
+As well, determining the synchrony of the network will help one choose an
+algorithm to solve the problem. Solutions for problems with synchronous networks
+typically involve performing computation in fixed size (in time) rounds.
+Solutions to problems in asynchronous networks, on the other hand, can only make
+progress as messages are received and cannot operate in rounds.
+
+The rest of the article is organized as follows. First, I will give an overview
+of a hybrid network model, partial synchrony, and motivate its existence. Then,
+I will give examples of systems that are designed for partial synchrony.
+Finally, I will conclude.
+
+## Partial Synchrony
+## Examples
+## Conclusion
