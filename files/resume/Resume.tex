@@ -1,0 +1,155 @@
+\documentclass[margin,line]{resume}
+\newif\ifReferences
+\newif\ifOnline
+\usepackage{hyperref}
+
+%Make bottom margin nicer
+\addtolength{\textheight}{-0.75in}
+
+
+\begin{document}
+
+\Referencesfalse
+\Onlinefalse
+
+
+\name{\Large Connor Zanin}
+\begin{resume}
+
+
+\section{\mysidestyle Contact Information}
+\ifOnline
+	Email: zanin@ccs.neu.edu	 							\hfill Boston, MA\\
+\else
+    103 Norfolk Street \#7			                   			\hfill Cell: 781-879-2258\\
+    Cambridge, MA 02139								        \hfill Email: zanin@ccs.neu.edu\\
+    \mbox{}										\hfill Website: \url{ccs.neu.edu/home/zanin}\\
+\fi
+   
+
+
+
+
+\section{\mysidestyle Research Interests}
+Distributed Systems, Cloud Computing, Process Migration, Fault Tolerance and Recovery, Collaborative Systems
+
+
+\section{\mysidestyle Education}
+\textbf{Northeastern University}, Boston, MA \vspace{1mm}\\%
+\textsl{PhD in Computer Science} \hfill \textbf{September 2016 -- present}\vspace{-3mm}\\\vspace{-1mm}%
+\begin{list2}
+	\item GPA: 3.7
+	\item Expected Graduation: June 2021
+	\item Advisors: Alan Mislove, Cristina Nita-Rotaru
+\end{list2}
+
+\textbf{University of Delaware}, Newark, DE \vspace{1mm}\\%
+\textsl{B.S. in Computer Science} \hfill \textbf{September 2012 -- June 2016}\vspace{-3mm}\\\vspace{-1mm}%
+\begin{list2}
+	\item GPA: 3.7
+    \item Graduated: May 2016
+    \item Thesis: \textsl{Capturing the Mapreduce Performance Landscape}
+    \item Advisor:  Dr. Michela Taufer
+\end{list2}\vspace{-1.5mm}    
+
+
+
+%\section{\mysidestyle Posters}
+
+
+\section{\mysidestyle Professional Experience}
+\textbf{Northeastern University}, Boston, MA\hfill\textbf{September 2016 -- present}\\
+\textbf{Research Assistant}\hfill 
+\vspace{-3mm}\\\vspace{-1mm}
+\begin{list2}
+	\item \filbreak\textit{PicoJump:} A system for process migration and load balancing. Enabling single-machine applications to execute correctly in a distributed environment and transparently to the operating system and application.
+\end{list2}
+
+\textbf{Global Computing Laboratory}, Newark, DE\hfill\textbf{May 2015 -- May 2016}\\
+\textbf{Research Assistant}\hfill 
+\vspace{-3mm}\\\vspace{-1mm}
+\begin{list2}
+	\item \filbreak\textit{HYPPO:} Developed a HYbrid Piece-wise POlynomial approach for optimizing MapReduce framework hyper-parameters.
+\end{list2}
+
+\textbf{EM Photonics}, Newark, DE\hfill\textbf{September 2014 -- May 2015}\\
+\textbf{Software Engineering Intern}\hfill 
+\vspace{-3mm}\\\vspace{-1mm}
+\begin{list2}
+	\item \filbreak\textit{Software development:} Developed features and fixed bugs for a video processing application.
+\end{list2}
+
+\textbf{Nasdaq OMX}, Marlborough, MA\hfill\textbf{June 2014 -- August 2014}\\
+\textbf{QA Software Engineering Intern}\hfill 
+\vspace{-3mm}\\\vspace{-1mm}
+\begin{list2}
+	\item \filbreak\textit{Performance testing automation:} Developed framework and tests for performance evaluation of a web application.
+	\item \filbreak\textit{Performance evaluation:} Evaluated full-stack performance characteristics of a web application. Compiled findings in a reference document for business planning.
+\end{list2}
+
+\textbf{Lattice Engines}, Boston, MA\hfill\textbf{June 2013 -- August 2013}\\
+\textbf{QA Software Engineering Intern}\hfill 
+\vspace{-3mm}\\\vspace{-1mm}
+\begin{list2}
+	\item \filbreak\textit{Automated unit testing:} Developed automated testing for a web application. Made enhancements to the existing unit test framework.
+\end{list2}
+
+%\section{\mysidestyle Honors and Awards}
+%Geoffery Eric Wright Outstanding Junior Award 2015
+%\vspace{1mm}\\%
+%Second place in Oregon for ACM Programming Competition 2015
+%\vspace{1mm}\\%
+%University of Oregon Dean's List (multiple terms)
+%\vspace{1mm}\\%
+%University of Oregon Presidential Scholarship 2013
+%\vspace{1mm}\\%
+%University of Oregon National Merit Scholarship 2013
+
+\section{\mysidestyle Publications}
+
+\filbreak
+Connor Zanin, Katura Harvey, Liang Zhang, Deepak Garg, Thoephilus Benson, Dave Levin, and Alan Mislove.\\
+``\textbf{PicoJump; A System for Transparently Migrating Processes to Resources}''
+[Under Submission. 2018]
+
+%\filbreak
+%\section{\mysidestyle Relevant\\Skills} 
+%\textbf{Programming Languages:} Python, C, C++, Java, C\#, ML\vspace{2mm}\\
+%\textbf{Other:} OpenCV, SQL 
+
+
+\filbreak
+\vspace{-3mm}
+\vspace{-2mm}
+\section{\mysidestyle Relevant Courses}
+Distributed Systems, Systems, Machine Learning,
+Algorithms \& Data structures, Software Engineering,
+Compilers, Virtualization
+
+%\filbreak
+%\section{\mysidestyle Activities}
+%Organize group meetings for Networks and Distributed Systems Security PhD students\vspace{1.5mm}\\
+%Endurance running\vspace{1.5mm}\\
+%Organize and compete in tournaments for Super Smash Brothers\vspace{1.5mm}\\
+ 
+%\filbreak
+%\section{\mysidestyle Professional Affiliations}
+
+
+%\filbreak
+%\section{\mysidestyle References}
+%\ifReferences
+%	\begin{tabular}{@{}p{6cm}p{6cm}}
+%	 \textbf{Dr. Cristina Nita-Rotaru} 	& \textbf{Dr. Sonia Fahmy}\\
+%	 Associate Professor					& Professor\\
+%	 Northeastern University				& Northeastern University\\
+%	 Boston, MA			                	& Boston, MA \\
+%	 phone: 765-496-6757					& phone: 765-494-6183\\
+%	 email: crisn@cs.purdue.edu				& email: fahmy@cs.purdue.edu\\
+%	 \end{tabular}
+%
+%\else % References
+%	{\sl Available on request}
+%\fi
+\end{resume}
+\end{document}
