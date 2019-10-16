@@ -18,6 +18,11 @@ systems written in Golang.
 [The DSDRIVER source code](https://github.com/cnnrznn/dsdriver)
 
 ## The inspiration
+The convention in papers from the 80's that give distributed system protocols is
+to abstract the network as a buffer of messages with the semantics that a
+`send()` call only need be made once and a `recv()` call will eventually deliver
+the message with some finite delay.
+
 - Abstracting unreliable network
   - assume a send will eventually be received
 - Fault tolerance testing
