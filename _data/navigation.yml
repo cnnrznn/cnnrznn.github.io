@@ -14,6 +14,9 @@ main:
         
   - title: "Blog Posts"
     url: /year-archive/
+
+  - title: "Coffee"
+    url: https://instagram.com/zanin_coffee
     
   - title: "CV"
     url: /files/resume/Resume.pdf
