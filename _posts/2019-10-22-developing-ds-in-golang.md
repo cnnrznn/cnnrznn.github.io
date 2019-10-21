@@ -37,13 +37,21 @@ they are described** in their respective papers. In addition, I want to be able
 to test for **(2) delay and reordering** of messages. Finally I want to be able
 to **(3) monitor and evaluate** works for bandwidth usage.
 
-## Using the `dsdriver`
+
+
+## Using `dsdriver`
 ### Installation
 `dsdriver` can be installed through the `go` tool:
 
-```bash
-go get github.com/cnnrznn/dsdriver
-```
+`go get github.com/cnnrznn/dsdriver`
 
 ### Usage
+First, Choose one of the $\*Hub$ functions in `dsdriver.go` depending on your
+needs. Or better yet, copy one and create your own! These functions are meant to
+implement different network behaviors. For example, you may implement a
+different $Hub$ if you need FIFO semantics between nodes ($BenignHub$ already
+has these semantics :) )
+
+To creat a local virtual network, call $Local(n, fn)$ where $n$ is the number of
+nodes in the system and $fn$ is one of the $Hub$ functions.
 
