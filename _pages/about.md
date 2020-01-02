@@ -8,8 +8,8 @@ redirect_from:
   - /about.html
 ---
 
-Hi! My name is Connor Zanin and I am a PhD student at Northeastern University.
-My main research focus is distributed systems.
+Hi! My name is Connor Zanin and I am a graduate student at Northeastern University.
+My research focus is distributed systems.
 Computers fail, and I love to think about how applications can be _correct_ and _performant_ in the face of faults.
 Specifically, I am interested in the theoretical assumptions made by protocols, and how those affect real implementations.
 
