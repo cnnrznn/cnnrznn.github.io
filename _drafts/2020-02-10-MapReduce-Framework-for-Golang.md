@@ -6,9 +6,9 @@ categories:
 ---
 
 In a world of big data and batch processing, MapReduce is unavoidable. But my
-recent experience of getting Hadoop up and running for single-node debugging has
-been a nightmare. Here, I present my implementation of the MapReduce framework
-written in my favorite language and designed for a single machine.
+recent experience of getting Hadoop up and running for single-node debugging was
+a nightmare. Here, I present my implementation of the MapReduce framework
+written in my favorite language, Go, and designed for a single machine.
 
 The code can be found [here](https://github.com/cnnrznn/gomr).
 
@@ -93,6 +93,10 @@ func Run(nMap, nRed int, m Mapper, p Partitioner, r Reducer) (inMap, outRed chan
 The library returns two channels, `inMap` and `outRed` for supplying input
 values and delivering outputs from the reduce.
 
+### Input
+- offer a parallelized input function
+
+### Hashing
 
 ## Examples
 
