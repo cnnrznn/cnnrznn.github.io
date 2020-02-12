@@ -12,7 +12,21 @@ written in my favorite language, Go, and designed for a single machine.
 
 The code can be found [here](https://github.com/cnnrznn/gomr).
 
-## Motivation
+# Abstract
+
+MapReduce was created to solve the problem of running large computations accross
+many low-powered, cheap machines. However, today's consumer machines are much
+more powerful. It is not uncommon for a consumer laptop to have 8 or more CPUs
+and 16+ GB of RAM. With machines of this capability, surely the types of
+computations we can do on a single machine has grown.
+
+In this article, I present the design, implementation, and evaluation of a new
+MapReduce framework, ***GoMR***. GoMR is designed for moderate to high-power
+consumer and server machines that can handle running mapreduce jobs locally.
+GoMR makes it easy to write map-reduce code that instantly scales to efficiently
+use the resources of a single machine.
+
+# Motivation
 
 MapReduce frameworks are great because they abstract away all of the nasty
 details of distributed infrastructure. The framework provides the programmer
@@ -30,7 +44,7 @@ runtime's awareness of the number of available cores, and not having to figure
 out how to set an upper/lower limit for the jvm's heap size were all
 motivations for doing this.
 
-## Design
+# Design
 
 The design of the one-machine MapReduce is quite simple. The _library_ will define
 some types for mappers, reducers, and partitioners. It will also take
@@ -43,7 +57,7 @@ The _driver_ is a program the user of the library will write. The driver is
 responsible for handling input and output values from the map and reduce stages,
 respectively.
 
-### Combiners?
+## Combiners?
 
 The observant reader will notice I have ignored the use of combiners. Since this
 is a framework for a single machine, having a combiner does not make sense. In
@@ -52,7 +66,7 @@ the network. Here, there is no such optimization possible. In fact, a combiner
 would only add overhead as more channels would need to be created to connect the
 combiner to the mapper and partitioner.
 
-### Channels or Values?
+## Channels or Values?
 
 A design decision that came up in this process was the decision to have the user
 deal with channels or values. For example, we could supply either of the
@@ -80,25 +94,32 @@ fields in the struct that implements the `Mapper` interface, but then they have
 to deal with synchronization and locking on a Mapper-to-Mapper level. In the
 end, I decided to expose more complexity and flexibility to the user.
 
-### User API
+## User API
 
 To use the framework, the user must implement a `Mapper`, `Partitioner`, and
 `Reducer`. The library's `Run()` method builds a MapReduce architecture with the
 supplied number of mappers and reducers.
 
 ```go
-func Run(nMap, nRed int, m Mapper, p Partitioner, r Reducer) (inMap, outRed chan interface{})
+func Run(nMap, nRed int, m Mapper, p Partitioner, r Reducer) (inMap []chan interface{},
+                                                              outRed chan interface{})
 ```
 
 The library returns two channels, `inMap` and `outRed` for supplying input
 values and delivering outputs from the reduce.
 
-### Input
-- offer a parallelized input function
+## Input
+After doing a first round of evaluation, It became apparent that reading the
+input file is a source of bottleneck. To remedy this, I implemented a
+`TextFile()` function that is meant to operate similarly to Sparks `textFile()`.
+The major performance improvement is that each mapper is now supplied input from
+its own scanner operating in parallel on a different chunk of the file.
 
-### Hashing
+## Hashing
+Because ther user must supply their own partitioner, it is worth briefly
+discussing possibilities for mapping map keys to reducers.
 
-## Evaluation
+# Evaluation
 
 Here I present a comparison of GoMR against Apache Spark. I ran these
 experiments on a 6-core AMD machine with 16GB of memory.
@@ -108,7 +129,7 @@ The framework comes with some
 include the canonical wordcount, a 2-cycle counting program, and a triangle
 counting program.
 
-### Wordcount
+## Wordcount
 For this evaluation, I'll be using the following html document:
 [moby dick](https://www.gutenberg.org/files/2701/2701-h/2701-h.htm). I have
 replicated it to a size of 1.8 GB.
@@ -133,7 +154,7 @@ for count in counts.collect():
 Unfortunately, the wordcount in Go comes out much longer at
 
 | Nodes | System | Time |
-|---|-----:|------|
+|---|-----|------|
 |1| Spark | 11m 41.550s |
 |1| **GoMR** | 8m 59.886s |
 |2| Spark | 6m 30.589s |
@@ -143,12 +164,21 @@ Unfortunately, the wordcount in Go comes out much longer at
 |8| Spark | 3m 2.8s |
 |8| **GoMR** | 3m 21.8s  |
 
-## Discussion
+Interestingly, GoMR initially beats Spark, but then falls behind as we increase
+the number of nodes. This is due to the behavior of the Go file object that has
+a parallel read method. More on this is in the discussion. However, when I
+increase the parallelism, Spark takes the lead. This is because Spark is able to
+read files in parallel, making better use of the machine's available resources.
+
+As discussed in the design, this inspired the creation of my own parallel read
+function for files. Using this method, the performance numbers change a bit:
+
+# Discussion
 
 During the evaluation I noticed some odd behavior from Spark and Go that I
 thought is worth discussing.
 
-### Golang's canonical `readFile()`
+## Golang's canonical `readFile()`
 
 Go's file seems to implement a parallel Reader interface. I noticed when
 scanning through the input the file, all available cores were being used.
