@@ -12,7 +12,7 @@ written in my favorite language, Go, and designed for a single machine.
 
 The code can be found [here](https://github.com/cnnrznn/gomr).
 
-## The Motivation
+## Motivation
 
 MapReduce frameworks are great because they abstract away all of the nasty
 details of distributed infrastructure. The framework provides the programmer
@@ -30,7 +30,7 @@ runtime's awareness of the number of available cores, and not having to figure
 out how to set an upper/lower limit for the jvm's heap size were all
 motivations for doing this.
 
-## The Design
+## Design
 
 The design of the one-machine MapReduce is quite simple. The _library_ will define
 some types for mappers, reducers, and partitioners. It will also take
@@ -98,7 +98,10 @@ values and delivering outputs from the reduce.
 
 ### Hashing
 
-## Examples
+## Evaluation
+
+Here I present a comparison of GoMR against Apache Spark. I ran these
+experiments on a 6-core AMD machine with 16GB of memory.
 
 The framework comes with some
 [examples](https://github.com/cnnrznn/gomr/tree/master/examples). For now, they
@@ -106,11 +109,49 @@ include the canonical wordcount, a 2-cycle counting program, and a triangle
 counting program.
 
 ### Wordcount
-Let's take a look at the wordcount application and see how it's different from
-the typical approach. A spark wordcount program is typically defined as follows.
+For this evaluation, I'll be using the following html document:
+[moby dick](https://www.gutenberg.org/files/2701/2701-h/2701-h.htm). I have
+replicated it to a size of 1.8 GB.
+
+Let's take a look at the "hello-world" of MapReduce and see how a program
+written in GoMR is different from it's Spark counterpart. A spark wordcount
+program is typically defined as follows.
 
 ```python
+sc = SparkContext("local", "Wordcount")
+
+text_file = sc.textFile(sys.argv[1])
+
 counts = text_file.flatMap(lambda line: line.split(" ")) \
                   .map(lambda word: (word, 1)) \
                   .reduceByKey(lambda a, b: a + b)
+
+for count in counts.collect():
+    print(count)
 ```
+
+Unfortunately, the wordcount in Go comes out much longer at
+
+| Nodes | System | Time |
+|---|-----:|------|
+|1| Spark | 11m 41.550s |
+|1| **GoMR** | 8m 59.886s |
+|2| Spark | 6m 30.589s |
+|2| **GoMR** | 6m 26.743s |
+|4| Spark | 3m 45.6s |
+|4| **GoMR** | 4m 25.9s  |
+|8| Spark | 3m 2.8s |
+|8| **GoMR** | 3m 21.8s  |
+
+## Discussion
+
+During the evaluation I noticed some odd behavior from Spark and Go that I
+thought is worth discussing.
+
+### Golang's canonical `readFile()`
+
+Go's file seems to implement a parallel Reader interface. I noticed when
+scanning through the input the file, all available cores were being used.
+Somewhere between file `Open()` and `Scan()`, the operations are being
+parallelized. Unfortunately, I might be bottlenecking these operations by
+funneling them through a single channel.
