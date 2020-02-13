@@ -3,6 +3,9 @@ layout: single
 title:  "GoMR: A MapReduce Framework for Golang"
 categories: 
   - distributed systems
+tags:
+  - batch processing
+  - mapreduce
 ---
 
 In a world of big data and batch processing, MapReduce is unavoidable. But my
@@ -151,7 +154,53 @@ for count in counts.collect():
     print(count)
 ```
 
-Unfortunately, the wordcount in Go comes out much longer at
+Unfortunately, the wordcount in Go comes out much longer at about 75 lines. The
+three important functions are given in the following snippet.
+
+```go
+func (w *WordCount) Map(in <-chan interface{}, out chan<- interface{}) {
+	for elem := range in {
+		for _, word := range strings.Split(elem.(string), " ") {
+			out <- word
+		}
+	}
+
+	close(out)
+}
+
+func (w *WordCount) Partition(in <-chan interface{}, outs []chan interface{}, wg *sync.WaitGroup) {
+	for elem := range in {
+		key := elem.(string)
+
+		h := sha1.New()
+		h.Write([]byte(key))
+		hash := int(binary.BigEndian.Uint64(h.Sum(nil)))
+		if hash < 0 {
+			hash = hash * -1
+		}
+
+		outs[hash%len(outs)] <- key
+	}
+
+	wg.Done()
+}
+
+func (w *WordCount) Reduce(in <-chan interface{}, out chan<- interface{}, wg *sync.WaitGroup) {
+	counts := make(map[string]int)
+
+	for elem := range in {
+		key := elem.(string)
+		counts[key]++
+	}
+
+	for k, v := range counts {
+		out <- Count{k, v}
+	}
+
+	wg.Done()
+}
+
+```
 
 | Nodes | System | Time |
 |---|-----|------|
@@ -169,9 +218,22 @@ the number of nodes. This is due to the behavior of the Go file object that has
 a parallel read method. More on this is in the discussion. However, when I
 increase the parallelism, Spark takes the lead. This is because Spark is able to
 read files in parallel, making better use of the machine's available resources.
+However, for low parallelism the reader is restricted. This is why GoMR wins in
+the 1 and 2 node cases.
 
 As discussed in the design, this inspired the creation of my own parallel read
 function for files. Using this method, the performance numbers change a bit:
+
+| Nodes | System | Time |
+|---|-----|------|
+|1| Spark       | |
+|1| **GoMR**    | |
+|2| Spark       | |
+|2| **GoMR**    | |
+|4| Spark       | |
+|4| **GoMR**    | |
+|8| Spark       | |
+|8| **GoMR**    | |
 
 # Discussion
 
