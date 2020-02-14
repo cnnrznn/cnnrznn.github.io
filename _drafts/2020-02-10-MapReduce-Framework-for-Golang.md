@@ -21,13 +21,13 @@ MapReduce was created to solve the problem of running large computations accross
 many low-powered, cheap machines. However, today's consumer machines are much
 more powerful. It is not uncommon for a consumer laptop to have 8 or more CPUs
 and 16+ GB of RAM. With machines of this capability, surely the types of
-computations we can do on a single machine has grown.
+computations we can do on a single machine have changed.
 
 In this article, I present the design, implementation, and evaluation of a new
 MapReduce framework, ***GoMR***. GoMR is designed for moderate to high-power
-consumer and server machines that can handle running mapreduce jobs locally.
-GoMR makes it easy to write map-reduce code that instantly scales to efficiently
-use the resources of a single machine.
+consumer and server machines that can have the memory capacity to run mapreduce
+jobs locally.  GoMR makes it easy to write map-reduce code that instantly scales
+to efficiently use the resources of a single machine.
 
 # Motivation
 
@@ -112,11 +112,59 @@ The library returns two channels, `inMap` and `outRed` for supplying input
 values and delivering outputs from the reduce.
 
 ## Input
-After doing a first round of evaluation, It became apparent that reading the
-input file is a source of bottleneck. To remedy this, I implemented a
-`TextFile()` function that is meant to operate similarly to Sparks `textFile()`.
-The major performance improvement is that each mapper is now supplied input from
-its own scanner operating in parallel on a different chunk of the file.
+After doing a first round of evaluation, I suspected that file input to the
+mappers may be a bottleneck. In the beginning, I created a single input channel
+and had all mappers read from that channel. While this is legal in Go and
+produces the correct result, I wondered if I could do better. My first
+implementation was something like the following.
+
+```go
+// Driver-side
+inMap := make(chan interface{}, nMap * CHANBUF)
+```
+```go
+// User-side
+scanner := bufio.NewScanner(file)
+for scanner.Scan() {
+    inMap <- scanner.Text()
+}
+close(inMap)
+```
+
+I decided to follow this suspicion and created a second version. This time, I
+would create a separate input channel for every mapper and multiplex the input
+among them:
+
+```go
+// Driver-side
+inMaps := make([]chan interface{}, nMap)
+for i:=0; i<nMap; i++ {
+    inMaps[i] = make(chan interface{}, CHANBUF)
+}
+```
+```go
+// User-side
+gomr.TextFile(fn, inMaps)
+```
+```go
+// TextFile()
+scanner := bufio.NewScanner(file)
+for d:=0; scanner.Scan(); d=(d+1)%nMap {
+    inMaps[d] <- scanner.Text()
+}
+for i:=0; i<nMap; i++ {
+    close(inMaps[i])
+}
+```
+
+Of course, there is still one more optimization I could make. Instead of having
+a single reader multiplex among the input channels, I could have multiple
+readers each seek to a section of the file and feed their input to their
+respective mapper.
+
+This makes the implementation significantly more complicated. Now, we have to
+chunk the file both by size and by newline, making sure no input lines are
+skipped or duplicated in the computation.
 
 ## Hashing
 Because ther user must supply their own partitioner, it is worth briefly
