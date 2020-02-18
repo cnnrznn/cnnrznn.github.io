@@ -119,11 +119,11 @@ produces the correct result, I wondered if I could do better. My first
 implementation was something like the following.
 
 ```go
-// Driver-side
+// Library-side
 inMap := make(chan interface{}, nMap * CHANBUF)
 ```
 ```go
-// User-side
+// Driver-side
 scanner := bufio.NewScanner(file)
 for scanner.Scan() {
     inMap <- scanner.Text()
@@ -136,18 +136,18 @@ would create a separate input channel for every mapper and multiplex the input
 among them:
 
 ```go
-// Driver-side
+// Library-side
 inMaps := make([]chan interface{}, nMap)
 for i:=0; i<nMap; i++ {
     inMaps[i] = make(chan interface{}, CHANBUF)
 }
 ```
 ```go
-// User-side
+// Driver-side
 gomr.TextFile(fn, inMaps)
 ```
 ```go
-// TextFile()
+// Library - TextFileMultiplex()
 scanner := bufio.NewScanner(file)
 for d:=0; scanner.Scan(); d=(d+1)%nMap {
     inMaps[d] <- scanner.Text()
@@ -165,6 +165,84 @@ respective mapper.
 This makes the implementation significantly more complicated. Now, we have to
 chunk the file both by size and by newline, making sure no input lines are
 skipped or duplicated in the computation.
+
+```go
+func TextFileParallel(fn string, inMap []chan interface{}) {
+	file, err := os.Open(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	stat, err := file.Stat()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	size := stat.Size()
+	nChunks := len(inMap)
+	chunkSize := int64(math.Ceil(float64(size) / float64(nChunks)))
+
+	for i := 0; i < nChunks; i++ {
+		go func(i int) {
+			buffer := make([]byte, FILEBUF)
+			atEOF := false
+			skippedFirst := false
+
+			start := chunkSize * int64(i)
+			end := start + chunkSize
+			bufstart, bufend := 0, 0
+			log.Println(i, start, end)
+
+			file, _ := os.Open(fn)
+			defer file.Close()
+
+			pos, err := file.Seek(start, 0)
+			if err != nil || pos != start {
+				log.Fatal(pos, err)
+			}
+
+			for start <= end && !atEOF {
+				copy(buffer, buffer[bufstart:bufend])
+				bufend -= bufstart
+
+				n, err := file.Read(buffer[bufend:])
+				if err != nil {
+					if err == io.EOF {
+						atEOF = true
+					} else {
+						log.Fatal(err)
+					}
+				}
+
+				bufstart = 0
+				bufend += n
+
+				for start <= end {
+					advance, token, err := bufio.ScanLines(buffer[bufstart:bufend], atEOF)
+					if err != nil {
+						log.Fatal(err)
+					}
+
+					if advance == 0 {
+						break
+					}
+
+					bufstart += advance
+					start += int64(advance)
+
+					if i == 0 || skippedFirst {
+						inMap[i] <- string(token)
+					}
+					skippedFirst = true
+				}
+			}
+
+			close(inMap[i])
+		}(i)
+	}
+}
+```
 
 ## Hashing
 Because ther user must supply their own partitioner, it is worth briefly
