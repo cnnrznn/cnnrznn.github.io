@@ -244,10 +244,6 @@ func TextFileParallel(fn string, inMap []chan interface{}) {
 }
 ```
 
-## Hashing
-Because ther user must supply their own partitioner, it is worth briefly
-discussing possibilities for mapping map keys to reducers.
-
 # Evaluation
 
 Here I present a comparison of GoMR against Apache Spark. I ran these
