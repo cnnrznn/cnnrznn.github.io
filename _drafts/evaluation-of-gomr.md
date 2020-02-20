@@ -1,34 +1,61 @@
 ---
 layout: single
-title:  "Draft Post"
+title:  "Evaluation of GoMR Against Spark"
 header:
-  teaser: "unsplash-gallery-image-2-th.jpg"
 categories: 
-  - Jekyll
+  - distributed systems
 tags:
-  - edge case
+  - MapReduce
 ---
-# Evaluation
 
-Here I present a comparison of GoMR against Apache Spark. I ran these
-experiments on a 6-core AMD machine with 16GB of memory.
+I created GoMR to solve a simple problem: make it efficient and painless to
+deploy MapReduce jobs on a single, moderately powerfull machine. Despite not
+having as pretty of an interface as today's competitor, Apache Spark, I believe
+I was successful in achieving this goal. As well, the system and applications
+are written in my favorite language, Go.
 
-The framework comes with some
-[examples](https://github.com/cnnrznn/gomr/tree/master/examples). For now, they
-include the canonical wordcount, a 2-cycle counting program, and a triangle
-counting program.
+In this article, I compare the performance of GoMR against one of the
+heavy-weights of the MapReduce world, Apache Spark.
+
+# Experimental Setup
+I compare GoMR to Spark with two programs, the canonical wordcount and a
+triangle-counting program. As well, I perform the evaluation on two machines: my
+6-core, 16GB desktop, and a 32-core, 200GB server.
+
+The code for the evaluation can be found here:
+- [Wordcount](https://github.com/cnnrznn/gomr/tree/master/examples/wordcount)
+- [Counting Triangles](https://github.com/cnnrznn/gomr/tree/master/examples/count-triangles)
+
+## Parallelism
+To eliminate another variable in the evaluation, I have a single independent
+variable, parallelism. Parallelism defines the number of mappers and reducers
+allocated to a job, and they are the same. So $parallelism=1$ means one mapper,
+one partitioner, and one reducer. $parallelism=2$ means two mappers, two
+partitioners, and two reducers, and so on. Further experiments could be done to
+capture trade-offs between more mappers than reducers and vice-versa. I'm sure
+that work has been done before, so to keep things simple let's just have a
+single number.
+
+## Multiplex and Parallel
+I include the evaluation for two version of GoMR: multiplex and parallel. The
+multiplex uses `TextFileMultiplex` and parallel uses `TextFileParallel`. The
+important results will be found by paying attention to the parallel versions of
+the code. If not stated, assume the code is using `TextFileParallel`. Evaluating
+wordcount using `TextFileMultiplex` is purely done for investigating Go's
+channel performance under one reader and multiple writers, and I would not
+recommend using that code in production.
 
 ## Wordcount
 For this evaluation, I'll be using the following html document:
 [moby dick](https://www.gutenberg.org/files/2701/2701-h/2701-h.htm). I have
-replicated it to a size of 1.8 GB.
+replicated it to a size of 1.8 GB [here](files/gomr/moby.txt).
 
 Let's take a look at the "hello-world" of MapReduce and see how a program
 written in GoMR is different from it's Spark counterpart. A spark wordcount
 program is typically defined as follows.
 
 ```python
-sc = SparkContext("local", "Wordcount")
+sc = SparkContext("local[{}]".format(parallelism), "Wordcount")
 
 text_file = sc.textFile(sys.argv[1])
 
@@ -45,18 +72,24 @@ three important functions are given in the following snippet.
 
 ```go
 func (w *WordCount) Map(in <-chan interface{}, out chan<- interface{}) {
+    counts := make(map[string]int)
+
 	for elem := range in {
 		for _, word := range strings.Split(elem.(string), " ") {
-			out <- word
+                        counts[word]++
 		}
 	}
+
+    for k, v := range counts {
+        out <- Count{k, v}
+    }
 
 	close(out)
 }
 
 func (w *WordCount) Partition(in <-chan interface{}, outs []chan interface{}, wg *sync.WaitGroup) {
 	for elem := range in {
-		key := elem.(string)
+		key := elem.(Count).Key
 
 		h := sha1.New()
 		h.Write([]byte(key))
@@ -65,7 +98,7 @@ func (w *WordCount) Partition(in <-chan interface{}, outs []chan interface{}, wg
 			hash = hash * -1
 		}
 
-		outs[hash%len(outs)] <- key
+		outs[hash%len(outs)] <- elem
 	}
 
 	wg.Done()
@@ -75,8 +108,8 @@ func (w *WordCount) Reduce(in <-chan interface{}, out chan<- interface{}, wg *sy
 	counts := make(map[string]int)
 
 	for elem := range in {
-		key := elem.(string)
-		counts[key]++
+		ct := elem.(Count)
+		counts[ct.Key] += ct.Value
 	}
 
 	for k, v := range counts {
@@ -85,51 +118,8 @@ func (w *WordCount) Reduce(in <-chan interface{}, out chan<- interface{}, wg *sy
 
 	wg.Done()
 }
-
 ```
 
-| Nodes | System | Time |
+| Parallelism | Spark | GoMR-Multiplex | GoMR-Parallel |
 |---|-----|------|
-|1| Spark | 11m 41.550s |
-|1| **GoMR** | 8m 59.886s |
-|2| Spark | 6m 30.589s |
-|2| **GoMR** | 6m 26.743s |
-|4| Spark | 3m 45.6s |
-|4| **GoMR** | 4m 25.9s  |
-|8| Spark | 3m 2.8s |
-|8| **GoMR** | 3m 21.8s  |
-
-Interestingly, GoMR initially beats Spark, but then falls behind as we increase
-the number of nodes. This is due to the behavior of the Go file object that has
-a parallel read method. More on this is in the discussion. However, when I
-increase the parallelism, Spark takes the lead. This is because Spark is able to
-read files in parallel, making better use of the machine's available resources.
-However, for low parallelism the reader is restricted. This is why GoMR wins in
-the 1 and 2 node cases.
-
-As discussed in the design, this inspired the creation of my own parallel read
-function for files. Using this method, the performance numbers change a bit:
-
-| Nodes | System | Time |
-|---|-----|------|
-|1| Spark       | |
-|1| **GoMR**    | |
-|2| Spark       | |
-|2| **GoMR**    | |
-|4| Spark       | |
-|4| **GoMR**    | |
-|8| Spark       | |
-|8| **GoMR**    | |
-
-# Discussion
-
-During the evaluation I noticed some odd behavior from Spark and Go that I
-thought is worth discussing.
-
-## Golang's canonical `readFile()`
-
-Go's file seems to implement a parallel Reader interface. I noticed when
-scanning through the input the file, all available cores were being used.
-Somewhere between file `Open()` and `Scan()`, the operations are being
-parallelized. Unfortunately, I might be bottlenecking these operations by
-funneling them through a single channel.
+|||||
