@@ -5,7 +5,7 @@ categories:
   - distributed systems
 tags:
   - batch processing
-  - mapreduce
+  - MapReduce
 ---
 
 In a world of big data and batch processing, MapReduce is unavoidable. But my
@@ -17,7 +17,7 @@ The code can be found [here](https://github.com/cnnrznn/gomr).
 
 # Abstract
 
-MapReduce was created to solve the problem of running large computations accross
+MapReduce was created to solve the problem of running large computations across
 many low-powered, cheap machines. However, today's consumer machines are much
 more powerful. It is not uncommon for a consumer laptop to have 8 or more CPUs
 and 16+ GB of RAM. With machines of this capability, surely the types of
@@ -25,7 +25,7 @@ computations we can do on a single machine have changed.
 
 In this article, I present the design, implementation, and evaluation of a new
 MapReduce framework, ***GoMR***. GoMR is designed for moderate to high-power
-consumer and server machines that can have the memory capacity to run mapreduce
+consumer and server machines that can have the memory capacity to run MapReduce
 jobs locally.  GoMR makes it easy to write map-reduce code that instantly scales
 to efficiently use the resources of a single machine.
 
@@ -38,8 +38,8 @@ programmer provides the framework the computation logic. Swell.
 
 Recent experience had left me banging my head against a wall trying to deploy
 these frameworks on a single machine for debugging. In the case of Hadoop, I
-either (1) could run in standalone mode but with no way of increasing the number
-of cores and memory the system would use, or (2) run in pseudo-standalone mode
+either (1) could run in stand-alone mode but with no way of increasing the number
+of cores and memory the system would use, or (2) run in pseudo-stand-alone mode
 with the same problems.
 
 I love Go and wanted to ditch Java for Golang. The abstraction of channels, the
@@ -58,7 +58,7 @@ functions all with the correct channels linking them.
 
 The _driver_ is a program the user of the library will write. The driver is
 responsible for handling input and output values from the map and reduce stages,
-respectively. It is also responsible for defining the logic of the mapreduce
+respectively. It is also responsible for defining the logic of the MapReduce
 job.
 
 ## Channels or Values?
@@ -124,7 +124,7 @@ type Reducer interface {
 The observant reader will notice I have ignored the use of combiners. Since this
 is a framework for a single machine, having a separate entity for a combiner
 does not make sense. In distributed MapReduce, combiners function to limit the
-ammount of data sent over the network. In GoMR, we would not want to create more
+amount of data sent over the network. In GoMR, we would not want to create more
 channels to send data from the mappers to the combiners as this is a waste of
 precious single-machine resources.
 
@@ -410,7 +410,7 @@ func (e *EdgeToTables) Reduce(in <-chan interface{}, out chan<- interface{}, wg 
 ```
 
 # Conclusion
-With this article, I showed how one can easily spin their own mapreduce
+With this article, I showed how one can easily spin their own MapReduce
 framework. I presented my implementation in Go and gave some examples of
 programs I wrote using the framework.
 
