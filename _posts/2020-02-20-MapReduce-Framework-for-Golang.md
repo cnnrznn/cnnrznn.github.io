@@ -132,11 +132,13 @@ Instead, combiner logic in GoMR should exist as a part of the mapper function.
 For example, we could write a wordcount  map function like so.
 
 ```go
-counts := make(map[string]int)
+func (w *WordCount) Map(in <-chan interface{}, out chan<- interface{}) {
+    counts := make(map[string]int)
 
-for elem := range inMap {
-    for _, word := range strings.Split(elem.(string), " ") {
-        counts[word]++
+    for elem := range inMap {
+        for _, word := range strings.Split(elem.(string), " ") {
+            counts[word]++
+        }
     }
 
     for k, v := range counts {
