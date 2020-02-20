@@ -58,16 +58,8 @@ functions all with the correct channels linking them.
 
 The _driver_ is a program the user of the library will write. The driver is
 responsible for handling input and output values from the map and reduce stages,
-respectively.
-
-## Combiners?
-
-The observant reader will notice I have ignored the use of combiners. Since this
-is a framework for a single machine, having a combiner does not make sense. In
-distributed MapReduce, combiners function to limit the ammount of data sent over
-the network. Here, there is no such optimization possible. In fact, a combiner
-would only add overhead as more channels would need to be created to connect the
-combiner to the mapper and partitioner.
+respectively. It is also responsible for defining the logic of the mapreduce
+job.
 
 ## Channels or Values?
 
@@ -110,6 +102,54 @@ func Run(nMap, nRed int, m Mapper, p Partitioner, r Reducer) (inMap []chan inter
 
 The library returns two channels, `inMap` and `outRed` for supplying input
 values and delivering outputs from the reduce.
+
+The interfaces for a mapper, reducer and partitioner are as follows.
+
+```go
+type Mapper interface {
+    Map(in <-chan interface{}, out chan<- interface{})
+}
+
+type Partitioner interface {
+    Partition(in <-chan interface{}, outs []chan interface{}, wg *sync.WaitGroup)
+}
+
+type Reducer interface {
+    Reduce(in <-chan interface{}, out chan<- interface{}, wg *sync.WaitGroup)
+}
+```
+
+## Combiners?
+
+The observant reader will notice I have ignored the use of combiners. Since this
+is a framework for a single machine, having a separate entity for a combiner
+does not make sense. In distributed MapReduce, combiners function to limit the
+ammount of data sent over the network. In GoMR, we would not want to create more
+channels to send data from the mappers to the combiners as this is a waste of
+precious single-machine resources.
+
+Instead, combiner logic in GoMR should exist as a part of the mapper function.
+For example, we could write a wordcount  map function like so.
+
+```go
+counts := make(map[string]int)
+
+for elem := range inMap {
+    for _, word := range strings.Split(elem.(string), " ") {
+        counts[word]++
+    }
+
+    for k, v := range counts {
+        out <- Count{k, v}
+    }
+
+    close(out)
+}
+```
+
+As stated before, this does introduce a higher burden on the user of the GoMR
+library. However, since the goal of this project is efficiency over simplicity,
+we will accept this optimization.
 
 ## Input
 After doing a first round of evaluation, I suspected that file input to the
