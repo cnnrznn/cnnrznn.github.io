@@ -144,7 +144,7 @@ for i:=0; i<nMap; i++ {
 ```
 ```go
 // Driver-side
-gomr.TextFile(fn, inMaps)
+gomr.TextFileMultiplex(fn, inMaps)
 ```
 ```go
 // Library - TextFileMultiplex()
@@ -244,40 +244,12 @@ func TextFileParallel(fn string, inMap []chan interface{}) {
 }
 ```
 
-# Evaluation
-
-Here I present a comparison of GoMR against Apache Spark. I ran these
-experiments on a 6-core AMD machine with 16GB of memory.
-
-The framework comes with some
-[examples](https://github.com/cnnrznn/gomr/tree/master/examples). For now, they
-include the canonical wordcount, a 2-cycle counting program, and a triangle
-counting program.
-
+# Examples
 ## Wordcount
-For this evaluation, I'll be using the following html document:
-[moby dick](https://www.gutenberg.org/files/2701/2701-h/2701-h.htm). I have
-replicated it to a size of 1.8 GB.
-
-Let's take a look at the "hello-world" of MapReduce and see how a program
-written in GoMR is different from it's Spark counterpart. A spark wordcount
-program is typically defined as follows.
-
-```python
-sc = SparkContext("local", "Wordcount")
-
-text_file = sc.textFile(sys.argv[1])
-
-counts = text_file.flatMap(lambda line: line.split(" ")) \
-                  .map(lambda word: (word, 1)) \
-                  .reduceByKey(lambda a, b: a + b)
-
-for count in counts.collect():
-    print(count)
-```
-
-Unfortunately, the wordcount in Go comes out much longer at about 75 lines. The
-three important functions are given in the following snippet.
+Of course, we need to start with the canonical wordcount example. The code can
+be found [here](https://github.com/cnnrznn/gomr/tree/master/examples/wordcount).
+This program has two versions for evaluation purposes. The difference between
+the two is which library function they use for input.
 
 ```go
 func (w *WordCount) Map(in <-chan interface{}, out chan<- interface{}) {
@@ -324,48 +296,83 @@ func (w *WordCount) Reduce(in <-chan interface{}, out chan<- interface{}, wg *sy
 
 ```
 
-| Nodes | System | Time |
-|---|-----|------|
-|1| Spark | 11m 41.550s |
-|1| **GoMR** | 8m 59.886s |
-|2| Spark | 6m 30.589s |
-|2| **GoMR** | 6m 26.743s |
-|4| Spark | 3m 45.6s |
-|4| **GoMR** | 4m 25.9s  |
-|8| Spark | 3m 2.8s |
-|8| **GoMR** | 3m 21.8s  |
+## Counting Triangles
+The reason I started this project was this example, found
+[here](https://github.com/cnnrznn/gomr/tree/master/examples/count-triangles).
+This program takes an edge file where every line is two vertex id's separated by
+a comma, and calculates the number of triangles in the graph. A triangle is
+defined as three unique vertices, A, B, and C, with edges A->B->C->A.
 
-Interestingly, GoMR initially beats Spark, but then falls behind as we increase
-the number of nodes. This is due to the behavior of the Go file object that has
-a parallel read method. More on this is in the discussion. However, when I
-increase the parallelism, Spark takes the lead. This is because Spark is able to
-read files in parallel, making better use of the machine's available resources.
-However, for low parallelism the reader is restricted. This is why GoMR wins in
-the 1 and 2 node cases.
+```go
+type EdgeToTables struct {
+	edges map[Edge]bool
+}
 
-As discussed in the design, this inspired the creation of my own parallel read
-function for files. Using this method, the performance numbers change a bit:
+func (e *EdgeToTables) Map(in <-chan interface{}, out chan<- interface{}) {
+	for elem := range in {
+		edge := elem.(Edge)
+		if edge.Fr < edge.To {
+			out <- JoinEdge{edge.To, "e1", edge}
+		}
+		out <- JoinEdge{edge.Fr, "e2", edge}
+	}
 
-| Nodes | System | Time |
-|---|-----|------|
-|1| Spark       | |
-|1| **GoMR**    | |
-|2| Spark       | |
-|2| **GoMR**    | |
-|4| Spark       | |
-|4| **GoMR**    | |
-|8| Spark       | |
-|8| **GoMR**    | |
+	close(out)
+}
 
-# Discussion
+func (e *EdgeToTables) Partition(in <-chan interface{}, outs []chan interface{}, wg *sync.WaitGroup) {
+	for elem := range in {
+		je := elem.(JoinEdge)
+		outs[je.Key%len(outs)] <- je
+	}
 
-During the evaluation I noticed some odd behavior from Spark and Go that I
-thought is worth discussing.
+	wg.Done()
+}
 
-## Golang's canonical `readFile()`
+func (e *EdgeToTables) Reduce(in <-chan interface{}, out chan<- interface{}, wg *sync.WaitGroup) {
+	jes := []JoinEdge{}
 
-Go's file seems to implement a parallel Reader interface. I noticed when
-scanning through the input the file, all available cores were being used.
-Somewhere between file `Open()` and `Scan()`, the operations are being
-parallelized. Unfortunately, I might be bottlenecking these operations by
-funneling them through a single channel.
+	for elem := range in {
+		je := elem.(JoinEdge)
+		jes = append(jes, je)
+	}
+
+	log.Println("Begin sorting")
+	sort.Sort(ByKeyThenTable(jes))
+	log.Println("End sorting")
+
+	numTriangles := 0
+	lastSeen := -1
+	arr := []Edge{}
+
+	for _, je := range jes {
+		if je.Key != lastSeen {
+			arr = nil
+			lastSeen = je.Key
+		}
+
+		if je.Table == "e1" {
+			arr = append(arr, je.Edge)
+		} else {
+			for _, e1 := range arr {
+				if e1.Fr < je.Edge.To {
+					if _, ok := e.edges[Edge{je.Edge.To, e1.Fr}]; ok {
+						numTriangles++
+					}
+				}
+			}
+		}
+	}
+
+	out <- numTriangles
+	wg.Done()
+}
+```
+
+# Conclusion
+With this article, I showed how one can easily spin their own mapreduce
+framework. I presented my implementation in Go and gave some examples of
+programs I wrote using the framework.
+
+In my next post, I will present the evaluation of GoMR against a popular, mature
+MR framework, Spark.
