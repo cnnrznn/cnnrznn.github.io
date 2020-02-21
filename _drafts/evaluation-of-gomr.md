@@ -22,6 +22,7 @@ I compare GoMR to Spark with two programs, the canonical wordcount and a
 triangle-counting program. As well, I perform the evaluation on two machines: my
 6-core, 16GB desktop, and a 32-core, 200GB server. For brevity, I'll refer to
 them as "desktop," and "server," respectively. Run-times are given in seconds.
+Results are the average of 10 trials, unless otherwise stated.
 
 The code for the evaluation can be found here:
 - [Wordcount](https://github.com/cnnrznn/gomr/tree/master/examples/wordcount)
@@ -132,6 +133,8 @@ func (w *WordCount) Reduce(in <-chan interface{}, out chan<- interface{}, wg *sy
 16 |67.89  |22.41 | 6.66
 32 |62.38  |27.28 | 5.69
 
+![Server Wordcount Performance](/images/evaluate-gomr/plot-wordcount-server.svg){: .align-center}
+
 From this data I can make a few key observations.
 
 First, Spark appears asymptotic for the 16 and 32 cases. This can be explained
@@ -162,7 +165,12 @@ for resources and scheduling overhead.
 
  Paralellism | Spark | GoMR Multiplex | GoMR Parallel
 ---:|:---:|:---:|:---:
-data | data | data | data
+1 | 724.25 |55.18 | 46.22
+2 | 376.13 |29.15 | 24.44
+4 | 223.47 |15.59 | 12.98
+8 | 182.33 |14.61 | 10.33
+
+![Desktop Wordcount Performance](/images/evaluate-gomr/plot-wordcount-desktop.svg){: .align-center}
 
 # A Note on Go Channels and MR
 
@@ -178,6 +186,6 @@ explanation of how this was invoking the channel's locking mechanism. Clearly,
 doing unnecessary communication was inefficient. Once I had augmented my
 algorithm with a combiner, the picture changed:
 
-![Good Wordcount Algorithm](/images/evaluate-gomr/good-algo.svg){: .align-center}
+![Good Wordcount Algorithm](/images/evaluate-gomr/plot-wordcount-server.svg){: .align-center}
 
 Nice.
