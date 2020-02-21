@@ -47,10 +47,29 @@ wordcount using `TextFileMultiplex` is purely done for investigating Go's
 channel performance under one reader and multiple writers, and I would not
 recommend using that code in production.
 
+## Scope and Hyperparameters
+For simplicitly, in this evaluation I am comparing the default hyper-parameters
+of Spark and GoMR. That is, I use the default configurations for each
+framework, and only vary the $parallelism$ variable discussed above.
+
+For GoMR, the hyperparameters would be the amount of buffering on channels and
+the amount of data read from the input file at a time. The defaults for these
+are 4096 and 32 MB, respectively.
+
+For Spark there are [many many
+parameters](https://spark.apache.org/docs/latest/configuration.html).
+
 # Wordcount
 For this evaluation, I'll be using the following html document:
 [moby dick](https://www.gutenberg.org/files/2701/2701-h/2701-h.htm). I have
-replicated it to a size of 1.8 GB [here](files/gomr/moby.txt).
+replicated it to a size of 1.8 GB.
+
+**Caveat:** When running the experiments, I accidentally used a different size
+input file on the server and desktop. They are both *around* 1.8 GB, but they
+differ slightly. This is why the results for the server and client are
+inconsistent by a significant margin. However, the input file is consistent
+across experiments on the same machine. All server experiments use the same
+input, and all desktop experiments use the same input.
 
 Let's take a look at the "hello-world" of MapReduce and see how a program
 written in GoMR is different from it's Spark counterpart. A spark wordcount
@@ -189,3 +208,10 @@ algorithm with a combiner, the picture changed:
 ![Good Wordcount Algorithm](/images/evaluate-gomr/plot-wordcount-server.svg){: .align-center}
 
 Nice.
+
+# Counting Triangles
+
+Counting triangles is a graph analysis algorithm where the objective is to
+instances of 3 nodes that form a clique. For the purpose of this evaluation, we
+will only focus on counting the number of triangles. If we had a machine with
+ample disk space, we could also flush these entries to disk.
