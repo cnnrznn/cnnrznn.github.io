@@ -216,7 +216,7 @@ find instances of 3 nodes that form a clique. For the purpose of this
 evaluation, we will only focus on counting the number of triangles. If we had
 a machine with ample disk space, we could also flush these entries to disk.
 
-The input for this evaluation is [`edges.csv`](files/gomr/edges.tar.gz), a
+The input for this evaluation is [`edges.csv`](https://drive.google.com/file/d/1hnzD93AE3H2nhp5-RSuRCmMRoIJS_NzR/view?usp=sharing), a
 file representing a twitter graph. Unfortunately, the original source of the
 data is no longer available. It seems [the
 website](http://socialcomputing.asu.edu/datasets/Twitter) has been taken
