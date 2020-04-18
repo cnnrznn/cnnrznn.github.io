@@ -10,19 +10,19 @@ tags:
 
 I created GoMR to solve a simple problem: make it efficient and painless to
 deploy MapReduce jobs on a single, moderately powerfull machine. Despite not
-having as pretty of an interface as today's competitor, Apache Spark, I believe
-I was successful in achieving this goal. As well, the system and applications
-are written in my favorite language, Go.
+having as pretty of an interface as today's competitor, Apache Spark, I
+believe I was successful in achieving this goal. As well, the system and
+applications are written in my favorite language, Go.
 
 In this article, I compare the performance of GoMR against one of the
 heavy-weights of the MapReduce world, Apache Spark.
 
 # Experimental Setup
 I compare GoMR to Spark with two programs, the canonical wordcount and a
-triangle-counting program. As well, I perform the evaluation on two machines: my
-6-core, 16GB desktop, and a 32-core, 200GB server. For brevity, I'll refer to
-them as "desktop," and "server," respectively. Run-times are given in seconds.
-Results are the average of 10 trials, unless otherwise stated.
+triangle-counting program. As well, I perform the evaluation on two machines:
+my 6-core, 16GB desktop, and a 32-core, 200GB server. For brevity, I'll refer
+to them as "desktop," and "server," respectively. Run-times are given in
+seconds. Results are the average of 10 trials.
 
 The code for the evaluation can be found here:
 - [Wordcount](https://github.com/cnnrznn/gomr/tree/master/examples/wordcount)
@@ -31,30 +31,30 @@ The code for the evaluation can be found here:
 ## Parallelism
 To eliminate another variable in the evaluation, I have a single independent
 variable, parallelism. Parallelism defines the number of mappers and reducers
-allocated to a job, and they are the same. So $parallelism=1$ means one mapper,
-one partitioner, and one reducer. $parallelism=2$ means two mappers, two
-partitioners, and two reducers, and so on. Further experiments could be done to
-capture trade-offs between more mappers than reducers and vice-versa. I'm sure
-that work has been done before, so to keep things simple let's just have a
-single number.
+allocated to a job, and they are the same. So $parallelism=1$ means one
+mapper, one partitioner, and one reducer. $parallelism=2$ means two mappers,
+two partitioners, and two reducers, and so on. Further experiments could be
+done to capture trade-offs between more mappers than reducers and vice-versa.
+I'm sure that work has been done before, so to keep things simple let's just
+have a single number.
 
 ## Multiplex and Parallel
 I include the evaluation for two version of GoMR: multiplex and parallel. The
 multiplex uses `TextFileMultiplex` and parallel uses `TextFileParallel`. The
-important results will be found by paying attention to the parallel versions of
-the code. If not stated, assume the code is using `TextFileParallel`. Evaluating
-wordcount using `TextFileMultiplex` is purely done for investigating Go's
-channel performance under one reader and multiple writers, and I would not
-recommend using that code in production.
+important results will be found by paying attention to the parallel versions
+of the code. If not stated, assume the code is using `TextFileParallel`.
+Evaluating wordcount using `TextFileMultiplex` is purely done for
+investigating Go's channel performance under one reader and multiple writers,
+and I would not recommend using that code in production.
 
 ## Scope and Hyperparameters
-For simplicitly, in this evaluation I am comparing the default hyper-parameters
-of Spark and GoMR. That is, I use the default configurations for each
-framework, and only vary the $parallelism$ variable discussed above.
+For simplicitly, in this evaluation I am comparing the default
+hyper-parameters of Spark and GoMR. That is, I use the default configurations
+for each framework, and only vary the $parallelism$ variable discussed above.
 
-For GoMR, the hyperparameters would be the amount of buffering on channels and
-the amount of data read from the input file at a time. The defaults for these
-are 4096 and 32 MB, respectively.
+For GoMR, the hyperparameters would be the amount of buffering on channels
+and the amount of data read from the input file at a time. The defaults for
+these are 4096 and 32 MB, respectively.
 
 For Spark there are [many many
 parameters](https://spark.apache.org/docs/latest/configuration.html).
@@ -193,17 +193,17 @@ for resources and scheduling overhead.
 
 # A Note on Go Channels and MR
 
-In the beginning, I wrote GoMR's map function to not perform a combine function.
-That is, the mapper would simply pass each word to the appropriate reducer.
-Because of this, I wound up with terrible performance.
+In the beginning, I wrote GoMR's map function to not perform a combine
+function. That is, the mapper would simply pass each word to the appropriate
+reducer. Because of this, I wound up with terrible performance.
 
 ![Bad Wordcount Algorithm](/images/evaluate-gomr/bad-algo.svg){: .align-center}
 
-The reason for this was that I was sending every word in the file through shared
-memory. [This talk](https://www.youtube.com/watch?v=KBZlN0izeiY) gives a good
-explanation of how this was invoking the channel's locking mechanism. Clearly,
-doing unnecessary communication was inefficient. Once I had augmented my
-algorithm with a combiner, the picture changed:
+The reason for this was that I was sending every word in the file through
+shared memory. [This talk](https://www.youtube.com/watch?v=KBZlN0izeiY) gives
+a good explanation of how this was invoking the channel's locking mechanism.
+Clearly, doing unnecessary communication was inefficient. Once I had
+augmented my algorithm with a combiner, the picture changed:
 
 ![Good Wordcount Algorithm](/images/evaluate-gomr/plot-wordcount-server.svg){: .align-center}
 
@@ -212,6 +212,54 @@ Nice.
 # Counting Triangles
 
 Counting triangles is a graph analysis algorithm where the objective is to
-instances of 3 nodes that form a clique. For the purpose of this evaluation, we
-will only focus on counting the number of triangles. If we had a machine with
-ample disk space, we could also flush these entries to disk.
+find instances of 3 nodes that form a clique. For the purpose of this
+evaluation, we will only focus on counting the number of triangles. If we had
+a machine with ample disk space, we could also flush these entries to disk.
+
+The input for this evaluation is [`edges.csv`](files/gomr/edges.tar.gz), a
+file representing a twitter graph. Unfortunately, the original source of the
+data is no longer available. It seems [the
+website](http://socialcomputing.asu.edu/datasets/Twitter) has been taken
+down.
+
+Recall that a motivation for this work is my grief with JVM memory
+allocation. I can run the GoMR implementation on the full dataset, but
+haven't been able to wrangle the Spark implementation to do the same. To that
+end, I implemented a filter to remove any edges to and from vertices above a
+threshold. I adjusted this threshold so that the experiment runs for enough
+time but does not exceed the jvm limitation.
+
+## Implementations
+
+- [GoMR](https://github.com/cnnrznn/gomr/blob/master/examples/count-triangles/triangles.go)
+- [PySpark](https://github.com/cnnrznn/gomr/blob/master/examples/count-triangles/triangles.py)
+
+## Server
+
+![Server Trianglecount Performance](/images/evaluate-gomr/plot-trianglecount-server.svg){: .align-center}
+
+ Paralellism | Spark | GoMR
+---:|:---:|:---:
+1 | 1688.13 | 230.39
+2 | 879.44 | 134.17
+4 | 473.32 | 71.13
+8 | 267.71 | 41.13
+16 | 177.90 | 31.68
+32 | 152.49 | 20.11
+
+## Laptop
+***Note*** due to Coronavirus, I am away from my apartment and unable to
+execute the experiment on my desktop machine. Instead, these experiments were
+run on my laptop which has 8 cores (intel core i7) and 16 GB of memory with
+48G of swap. The tests are run on windows subsystem for linux (WSL).
+
+![Laptop trianglecount Performance](/images/evaluate-gomr/plot-trianglecount-laptop.svg){: .align-center}
+
+ Paralellism | Spark | GoMR
+---:|:---:|:---:
+1 | 932.25 | 198.20
+2 | 499.75 | 106.15
+4 | 313.85 | 60.09
+8 | 281.04 | 44.80
+16 | 282.04 | 46.38
+32 | 293.55 | 45.11 
