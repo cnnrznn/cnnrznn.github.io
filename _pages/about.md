@@ -8,11 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-Hi! My name is Connor Zanin and I am a graduate student at Northeastern University.
-My research focus is distributed systems.
+Hi! My name is Connor Zanin and I recently graduated from Northeastern University with a MSc in Computer Science.
+During my time in undergrad and grad school, my research focus was distributed systems.
 Computers fail, and I love to think about how applications can be _correct_ and _performant_ in the face of faults.
-Specifically, I am interested in the theoretical assumptions made by protocols, and how those affect real implementations.
 
 When I'm not working on computers, I love to be outdoors hiking, climbing, and cycling.
-Besides writing computer programs, I roast coffee and work on bikes.
-If any of these things sound interesting to you, I write about them under _Blog Posts_ :)
+Some hobbies include coffee roasting, knife sharpening, bike maintenance, and cooking.
