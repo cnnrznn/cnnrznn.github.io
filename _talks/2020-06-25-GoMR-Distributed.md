@@ -13,6 +13,8 @@ More information [here](/distributed%20systems/MapReduce-Framework-for-Golang/) 
 [Slides](/files/GoMR/slides-distributed.pptx)
 <br>
 [Code](https://github.com/cnnrznn/gomr)
+<br>
+[Zoom Recording](https://drive.google.com/file/d/1J-jnrgC5AzawrOQVi6CfZ9tJEUKJaNPx/view?usp=sharing)
 
 A template repository for creating your own distributed GoMR jobs can be
 found [here](https://github.com/cnnrznn/wordcount-gomr).
