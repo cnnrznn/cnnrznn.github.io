@@ -19,6 +19,8 @@ More information [here](/distributed%20systems/MapReduce-Framework-for-Golang/) 
 A template repository for creating your own distributed GoMR jobs can be
 found [here](https://github.com/cnnrznn/wordcount-gomr).
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/RFNOeGItENs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Abstract
 
 In the original GoMR talk, I presented my implementation of a local mapreduce
