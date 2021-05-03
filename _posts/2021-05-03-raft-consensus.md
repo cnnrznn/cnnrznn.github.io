@@ -138,5 +138,6 @@ may be used by an external, (not-necessarily-golang) client.
     ]
 }
 ```
+Call this file `peers.json` and put it in the working directory where you will run `httpraft`.
 4. Run the binary with `./httpraft <id>` where `id` is the instance of the protocol.
 5. Point the postman collection to any of the endpoints in `apis`.
