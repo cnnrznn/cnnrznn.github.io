@@ -9,8 +9,6 @@ categories:
 tags:
 ---
 
-# Raft
-
 Raft is a protocol that solves the distributed systems problem of consensus.
 Specifically, Raft allows a network of machines to agree on the entries in an
 append-only log. When an entry is committed to the log on one machine, the
@@ -61,6 +59,19 @@ are equal and the other machine's log is at least as long.
 Normal operation is a bit of a misnomer (the whole protocol is normal
 operation), but refers to the part of the protocol responsible for accepting
 input from the user and coming to consensus on the input.
+
+In Raft, log append can be summarized as:
+> For each follower, the leader sends the follower all un-replicated log entries.
+> The follower appends the log entries and responds.
+> The leader sets the commit index to ***n*** when a simple majority of the followers have successfully replicated ***n***.
+> The follower sets the commit index to ***n*** when they learn the leader has a committed index of ***n***.
+
+Because there are `2f + 1` nodes in the cluster, if a message is replicated by a
+simple majority, `f + 1`, the committed entry is gauranteed to be able to
+survive if ***f*** nodes fail. If ***f*** nodes that replicated the log entry
+fail but one survives, it will be able to claim leadership because it has the
+most up-to-date log. Subsequently, as leader it will be able to replicate that
+log entry to the surviving followers.
 
 # Distributed systems and Go
 
