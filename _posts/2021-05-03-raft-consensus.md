@@ -120,3 +120,23 @@ collection](https://github.com/cnnrznn/raft-postman) that shows how `httpraft`
 may be used by an external, (not-necessarily-golang) client.
 
 # Usage
+
+1. Download [this repo](https://github.com/cnnrznn/raft) and build `cmd/httpraft`
+2. Download [the postman repo](https://github.com/cnnrznn/raft-postman)
+3. Create a json configuration for the network, like so:
+```json
+{
+    "peers": [
+        "localhost:8000",
+        "localhost:8001",
+        "localhost:8002"
+    ],
+    "apis": [
+        "localhost:9000",
+        "localhost:9001",
+        "localhost:9002"
+    ]
+}
+```
+4. Run the binary with `./httpraft <id>` where `id` is the instance of the protocol.
+5. Point the postman collection to any of the endpoints in `apis`.
