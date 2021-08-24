@@ -4,7 +4,7 @@ collection: talks
 type: "Talk"
 permalink: /talks/Go-Raft
 venue: "Mile High Gophers"
-date: 2021-09-22
+#date: 2021-09-22
 location: "Denver, Colorado"
 published: true
 ---
