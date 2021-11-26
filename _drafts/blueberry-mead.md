@@ -28,6 +28,8 @@ For example, I could do a mead for any kind of fruit.
 I could also introduce hops into the boil for a hop-y mead, or spices such as vanilla.
 The possibilities, and flavor combination, seem more creative and varied.
 
+Here are some pictures illustrating the process.
+
 ## Equipment and Ingredients
 
 ### Equipment
@@ -47,3 +49,13 @@ The possibilities, and flavor combination, seem more creative and varied.
 - Yeast nutrient
 
 ## Process
+
+1. Sanitize fermenter and airlock
+2. Bring 1 1/4 gallons of water to a boil with the blueberries and honey
+3. Boil for 30 minutes. The goal here is to (1) extract blueberry juice and (2) reduce the amount of liquid to 1 gallon
+4. Skim out blueberry pulp
+5. Cool in an ice bath to below 100 degrees fahrenheit
+6. Transfer to sanitized fermenter
+7. Add yeast and yeast nutrient
+8. Shake to oxygenate the must
+9. Seal with airlock and kick up your feet
