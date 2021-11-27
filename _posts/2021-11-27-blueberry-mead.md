@@ -13,7 +13,7 @@ After the dishes had been cleared from our Thanksgiving dinner, I began a long p
 Several months ago, after trying my hand at beer brewing,
 I picked up from my local homebrew store the yeast and nutrients necessary to brew mead.
 Simpler than beer - the barest version made only with honey - it seemed like a natural progression
-after learning about fermentation and processes for the home brewer.
+after learning about fermentation and processes of the home brewer.
 With excess time and energy, I began the therapeutic process of the boil...
 
 ## Mead?
