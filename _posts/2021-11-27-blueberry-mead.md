@@ -28,8 +28,6 @@ For example, I could do a mead for any kind of fruit.
 I could also introduce hops into the boil for a hop-y mead, or spices such as vanilla.
 The possibilities, and flavor combination, seem more creative and varied.
 
-Here are some pictures illustrating the process.
-
 ## Equipment and Ingredients
 
 ### Equipment
