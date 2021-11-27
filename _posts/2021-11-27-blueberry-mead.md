@@ -2,7 +2,7 @@
 layout: single
 title:  "A Blueberry Mead"
 header:
-  teaser: "unsplash-gallery-image-2-th.jpg"
+  teaser: "images/blueberry-mead/boil1.jpg"
 categories: 
   -  Kitchen
 tags:
@@ -44,18 +44,25 @@ Here are some pictures illustrating the process.
 ### Ingredients
 
 - 3 lb honey
+  - ![honey](/images/blueberry-mead/honey.jpg)
 - 2 1/2 lb blueberries
 - Wine yeast
+  - ![yeast](/images/blueberry-mead/yeast.jpg)
 - Yeast nutrient
+  - ![nutrient](/images/blueberry-mead/nutrient.jpg)
 
 ## Process
 
 1. Sanitize fermenter and airlock
 2. Bring 1 1/4 gallons of water to a boil with the blueberries and honey
+  - ![The boil](/images/blueberry-mead/boil1.jpg){: .align-center}
 3. Boil for 30 minutes. The goal here is to (1) extract blueberry juice and (2) reduce the amount of liquid to 1 gallon
+  - ![Boil 2](/images/blueberry-mead/boil2.jpg){: .align-center}
 4. Skim out blueberry pulp
 5. Cool in an ice bath to below 100 degrees fahrenheit
 6. Transfer to sanitized fermenter
 7. Add yeast and yeast nutrient
+  - ![combine](/images/blueberry-mead/combine.jpg)
 8. Shake to oxygenate the must
 9. Seal with airlock and kick up your feet
+  - ![ferment](/images/blueberry-mead/ferment.jpg)
