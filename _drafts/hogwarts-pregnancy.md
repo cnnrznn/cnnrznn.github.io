@@ -7,18 +7,19 @@ categories:
 ---
 
 _Hogwarts Legacy_ is a great game.
-Truly, when playing this game, you can feel the magic of stepping into the world of magic.
+Wholely, when playing this game you feel the amazement and nostalgia of stepping into the wizarding world of magic.
 It has gorgeous visuals and an engaging combat system, both of which prime you for a gripping adventure.
-However, while I can sing this games praises I also have critiques.
-These critiques, I believe, 
+However, while I can sing this games praises I also have many, many critiques.
+These critiques, I believe, prevent me from recommending this game to fellow capital "G" Gamers.
+Let me explain.
 
 ### Shallow choices
 
 #### Meaningless dialogue options
 
-#### Underutilized mechanics
-
 #### Dark souls ending but worse
+
+### Underutilized mechanics
 
 #### Fig's death feels unearned
 
