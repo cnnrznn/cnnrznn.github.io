@@ -1,7 +1,6 @@
 ---
 layout: single
-title:  "Hogwarts Pregnancy"
-subtitle: "The game still in gestation"
+title:  "Hogwarts Legacy: A Charming Disappointment"
 categories: 
   - Games
 published: true
