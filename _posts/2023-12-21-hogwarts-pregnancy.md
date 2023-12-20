@@ -4,6 +4,7 @@ title:  "Hogwarts Pregnancy"
 subtitle: "The game still in gestation"
 categories: 
   - Games
+published: true
 ---
 
 _Hogwarts Legacy_ is a great game.
