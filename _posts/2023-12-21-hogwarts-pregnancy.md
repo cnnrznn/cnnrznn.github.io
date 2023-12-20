@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Hogwarts Legacy: A Charming Disappointment"
-categories: 
+categories:
   - Games
 published: true
 ---
