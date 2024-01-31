@@ -1,6 +1,4 @@
 \documentclass[margin,line]{resume}
-\newif\ifReferences
-\newif\ifOnline
 \usepackage{hyperref}
 
 %Make bottom margin nicer
@@ -9,23 +7,15 @@
 
 \begin{document}
 
-\Referencesfalse
-\Onlinefalse
-
 
 \name{\Large Connor Zanin}
 \begin{resume}
 
 
 \section{\mysidestyle Contact Information}
-\ifOnline
-	Email: cnnrznn@gmail.com	 							\hfill Boston, MA\\
-\else
-   	\mbox{} \hfill Cell: 781-879-2258\\
-   	\mbox{} \hfill Email: cnnrznn@gmail.com\\
-    \mbox{} \hfill Website: \url{https://connorzanin.com}\\
-\fi
-   
+\mbox{} \hfill Cell: 781-879-2258\\
+\mbox{} \hfill Email: cnnrznn@gmail.com\\
+\mbox{} \hfill Website: \url{https://connorzanin.com}\\   
 
 
 \section{\mysidestyle education}
@@ -56,7 +46,7 @@
     \item Designed performance improvements for a mission critical, high volume service
     \item Built a load testing tool to improve load testing capability from thousands to millions of TPM
     \item Investigated/triaged operational issues as on-call
-    \item Tech stacks - AWS (various services), CDK (IAAS), Java, Javascript, Golang
+    %\item Tech stacks - AWS (various services), CDK (IAAS), Java, Javascript, Golang
 \end{list2}
 
 
@@ -67,7 +57,7 @@
 	\item Built and maintained core app services for an e-commerce/POS platform
     \item Lead full stack feature development of order notes
     \item Provided on-call support for customers and other teams
-    \item Tech stacks: Gitlab CI/CD, Flux, Kubernetes, Golang, Python
+    %\item Tech stacks: Gitlab CI/CD, Flux, Kubernetes, Golang, Python
     %\item Engineering feature lead on team responsible for core functionality.
     %\item Built a web frontend for a new feature release using React
 \end{list2}
@@ -128,8 +118,8 @@
 
 \filbreak
 \section{\mysidestyle Skills}
-\textbf{Programming Languages:} Golang, Python, Jave, Javascript, C, C++, C\#\\
-\textbf{Technologies:}  git, Kubernetes, Docker/Containers, Spark, AWS, Gitlab\\
+\textbf{Programming Languages:} Golang, Python, Typescript, React, ReactNative, Java, C, C++, C\#\\
+\textbf{Technologies:}  AWS, GCP, Spark, Containers (Kube, Docker, etc.), Expo
 \textbf{Operating Systems:} Linux, Windows, Mac
 
 \section{\mysidestyle Technology Interests}
@@ -139,14 +129,14 @@ Distributed Systems, Fault Tolerance and Recovery, Cloud Computing, Process Migr
 \textbf{GoMR}: A MapReduce system written for Golang - replaces Spark/Hadoop\\
 %\textbf{connorzanin.com}: Blog about various CS topics, mostly related to distributed systems
 
-\section{\mysidestyle Personal Interests}
-\begin{list2}
-    \item Running: Completed 5 ultramarathons including 2 50-mile races
-    \item Sport climbing
-    \item Hiking - 7 14,000 ft summits climbed. Nearly completed the hut-to-hut traverse in NH
-    \item Bikepacking
-    \item Coffee and latte art
-\end{list2}
+% \section{\mysidestyle Personal Interests}
+% \begin{list2}
+%     \item Running: Completed 5 ultramarathons including 2 50-mile races
+%     \item Sport climbing
+%     \item Hiking - 7 14,000 ft summits climbed. Nearly completed the hut-to-hut traverse in NH
+%     \item Bikepacking
+%     \item Coffee and latte art
+% \end{list2}
 
 
 %\section{\mysidestyle Publications}
