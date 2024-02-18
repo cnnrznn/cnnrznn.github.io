@@ -17,7 +17,6 @@ Science.  During my time in undergrad and grad school, my research focus was
 distributed systems.  Computers fail, and I love to think about how applications
 can be _correct_ and _performant_ in the face of faults.
 
-When I'm not working on computers, I love to be outdoors running, climbing, and
-cycling.  Currently, I'm primarily a long-distance runner training for 50k+
-races.  Some hobbies include coffee roasting, knife sharpening, bike
-maintenance, cooking, beer brewing, and reading.
+When I'm not working on computers, I love to be outdoors trail running.
+Currently I'm lifting and swimming, and looking forward to some trail races later this year.
+Some hobbies include latte art, music, building computers, and gaming.
